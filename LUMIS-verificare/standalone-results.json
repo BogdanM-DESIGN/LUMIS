@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "externalRequests": 0,
+  "method": "Complete HTML loaded as a document; file:// navigation blocked by cloud browser policy",
+  "checks": [
+    "embedded assets",
+    "3D options",
+    "selection indicator",
+    "cart",
+    "information dialog",
+    "responsive portrait image"
+  ]
+}

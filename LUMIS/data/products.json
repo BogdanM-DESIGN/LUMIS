@@ -1,0 +1,12 @@
+{
+  "currency": "RON",
+  "products": [
+    {"id":"litofanie","name":"Litofanie","number":"01","tag":"Fotografia ta, în lumină","description":"O amintire care se dezvăluie odată cu lumina. Fotografia ta devine un relief fin, imprimat în abajur.","short":"O fotografie. O lumină. Povestea ta.","price":null,"image":"litofanie","defaultBase":"galet","defaultColor":"alb","defaultRing":"champagne","personalized":true},
+    {"id":"wave","name":"Wave","number":"02","tag":"Formă în mișcare","description":"Șase valuri fluide, rotite discret de jos până sus. Un ritm liniștit de lumină și umbră.","short":"Șase valuri. Un ritm liniștit.","price":null,"image":"wave","defaultBase":"galet","defaultColor":"alb","defaultRing":"champagne","personalized":false},
+    {"id":"twist","name":"Twist","number":"03","tag":"Lumină cu un alt ritm","description":"Nervuri ascuțite într-o spirală de 180°. O siluetă sculpturală care se schimbă cu fiecare unghi.","short":"O spirală de lumină, la 180°.","price":null,"image":"twist","defaultBase":"monolit","defaultColor":"negru","defaultRing":"lumina","personalized":false},
+    {"id":"ribbed","name":"Ribbed","number":"04","tag":"Linii care se simt","description":"O siluetă de vază, desenată de 36 de nervuri fine. Textură tactilă, lumină blândă.","short":"36 de nervuri. O siluetă sculpturală.","price":null,"image":"ribbed","defaultBase":"monolit","defaultColor":"negru","defaultRing":"lumina","personalized":false}
+  ],
+  "bases":[{"id":"galet","name":"Galet","description":"Rotund, cu margini moi"},{"id":"monolit","name":"Monolit","description":"Cilindru cu umăr rotunjit"},{"id":"con","name":"Con","description":"Mai lat la bază, stabil"}],
+  "colors":[{"id":"alb","name":"Alb mat","hex":"#E2DFD8"},{"id":"negru","name":"Negru mat","hex":"#222120"},{"id":"grafit","name":"Grafit","hex":"#48484A"},{"id":"champagne","name":"Champagne","hex":"#CDB68C"}],
+  "rings":[{"id":"champagne","name":"Champagne"},{"id":"lumina","name":"Linie de lumină"}]
+}

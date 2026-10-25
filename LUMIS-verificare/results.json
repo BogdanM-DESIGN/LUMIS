@@ -1,0 +1,24 @@
+{
+  "result": "PASS",
+  "desktop": "1440×1000",
+  "mobileWidths": [
+    360,
+    390,
+    768
+  ],
+  "models": 4,
+  "optionConfigurationsExercised": 12,
+  "checks": [
+    "catalog",
+    "3D model updates",
+    "gallery",
+    "photo canvas without upload",
+    "cart persistence, quantity, remove, export",
+    "room transition, switch, hysteresis",
+    "automatic tour and interruption",
+    "responsive overflow",
+    "reduced motion",
+    "WebGL fallback",
+    "no JS errors or HTTP errors"
+  ]
+}
