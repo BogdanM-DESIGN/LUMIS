@@ -17,6 +17,12 @@ Lămpi decorative printate 3D: site de prezentare cu configurator și fișierele
 | [`PROMPT-PENTRU-CLAUDE.md`](PROMPT-PENTRU-CLAUDE.md) | brieful de rafinare a site-ului |
 | `imagini-noi-master/`, `original/` | imaginile master și pachetul inițial, păstrate pentru referință |
 
+## Istoric și propuneri
+
+- **Auditul și propunerea ChatGPT/Codex din 26 octombrie 2026** (ramura [`codex/lumis-audit-design-2026-10-26`](https://github.com/BogdanM-DESIGN/LUMIS/tree/codex/lumis-audit-design-2026-10-26/propuneri/chatgpt-2026-10-26)): corecțiile tehnice, designul cu Manrope, textele, imaginile noi și testele de regresie sunt integrate în `LUMIS/`, după verificare. Ce s-a preluat și ce s-a ajustat e descris în PR.
+- `actualizari/claude-2026-10-26/` și `livrare/`: copia pachetului trimis pentru analiza ChatGPT, păstrată pentru istoric. Sursa curentă e `LUMIS/`.
+- `original/` și `imagini-noi-master/`: pachetul inițial și imaginile lui master.
+
 ## Rulare și teste
 
 ```

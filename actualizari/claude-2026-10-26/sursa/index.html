@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUMIS</title>
+<meta name="description" content="Lămpi printate 3D și asamblate manual în România: Litofanie, Wave, Twist și Ribbed.">
+<meta name="theme-color" content="#F7F7F6">
+<link rel="preload" href="fonts/bodoni-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="skip" href="#colectie">Sari la colecție</a>
+
+<header class="nav glass" id="nav">
+  <a href="#top" class="logo" data-go="top" aria-label="LUMIS, începutul paginii">LUMIS</a>
+  <nav class="nav-links" aria-label="Navigare principală">
+    <a href="#colectie" data-go="colectie">Colecția</a>
+    <a href="#personalizare" data-go="personalizare">Personalizare</a>
+    <a href="#atelier" data-go="atelier">Atelier</a>
+  </nav>
+  <div class="nav-tools">
+    <button class="tour" type="button" id="tour" aria-pressed="false" title="Parcurge pagina automat. Se oprește la orice atingere.">
+      <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M7 4l13 8-13 8z" fill="currentColor"/><path class="i-stop" d="M6 6h12v12H6z" fill="currentColor"/></svg>
+      <span>Tur</span>
+    </button>
+    <button class="cart" type="button" id="cartBtn" aria-haspopup="dialog" aria-controls="cartDlg"><span class="cart-label">Coș</span><span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="h-hero">
+    <picture>
+      <source media="(max-aspect-ratio: 4/5)" srcset="img/pano-mobil-640.webp 640w, img/pano-mobil-1024.webp 1024w" sizes="100vw" width="1024" height="1536">
+      <img src="img/pano-desktop-1536.webp" srcset="img/pano-desktop-960.webp 960w, img/pano-desktop-1536.webp 1536w" sizes="100vw" width="1536" height="1024" fetchpriority="high" decoding="async"
+        alt="Randare: lămpile Twist, Litofanie, Wave și Ribbed aprinse pe o comodă din lemn, seara">
+    </picture>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <p class="hero-mark" aria-hidden="true">LUMIS</p>
+    <div class="hero-foot">
+      <div>
+        <h1 id="h-hero">Amintirile tale, în lumină</h1>
+        <p>Lămpi printate 3D · asamblate manual în România</p>
+      </div>
+      <a class="btn btn-light" href="#colectie" data-go="colectie">Vezi colecția</a>
+    </div>
+  </section>
+
+  <div class="intro wrap">
+    <p class="cap muted">Lumis acasă</p>
+    <h2 class="title">Aceeași cameră, ziua și seara</h2>
+  </div>
+
+  <section class="story" id="poveste" aria-label="Aceeași cameră, ziua și seara">
+    <div class="story-pin">
+      <div class="story-frame">
+        <img class="s-day" src="img/camera-zi-1920.webp" srcset="img/camera-zi-960.webp 960w, img/camera-zi-1920.webp 1920w" sizes="(max-width: 700px) 200vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async"
+          alt="Randare: lampa Litofanie stinsă pe o comodă din stejar, ziua, cu soare prin fereastră">
+        <img class="s-dusk" src="img/camera-seara-stinsa-1920.webp" srcset="img/camera-seara-stinsa-960.webp 960w, img/camera-seara-stinsa-1920.webp 1920w" sizes="(max-width: 700px) 200vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="">
+        <img class="s-on" src="img/camera-seara-aprinsa-1920.webp" srcset="img/camera-seara-aprinsa-960.webp 960w, img/camera-seara-aprinsa-1920.webp 1920w" sizes="(max-width: 700px) 200vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="">
+        <div class="story-card glass" aria-live="polite">
+          <div class="st st-off"><p class="cap muted">Ziua</p><p class="title">Un obiect de design, chiar și stinsă</p></div>
+          <div class="st st-on"><p class="cap muted">Seara</p><p class="title">Aprinsă, luminează camera</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="collection wrap" id="colectie" aria-labelledby="h-col">
+    <div class="sec-head">
+      <h2 class="title" id="h-col">Colecția</h2>
+      <p class="body">Patru forme de abajur, trei socluri, patru culori. Treci peste o lampă ca s-o vezi stinsă, ziua. Deschide-o ca s-o configurezi.</p>
+    </div>
+    <ul class="grid" id="grid"></ul>
+  </section>
+
+  <section class="personal wrap" id="personalizare" aria-labelledby="h-per">
+    <div class="compare" id="compare">
+      <img src="img/litofanie-seara-1160.webp" srcset="img/litofanie-seara-640.webp 640w, img/litofanie-seara-1160.webp 1160w" sizes="(max-width: 900px) 92vw, 46vw" width="1161" height="1355" loading="lazy" decoding="async" alt="Randare: litofania aprinsă, cu un peisaj montan vizibil prin abajur">
+      <div class="top"><img src="img/litofanie-zi-1160.webp" srcset="img/litofanie-zi-640.webp 640w, img/litofanie-zi-1160.webp 1160w" sizes="(max-width: 900px) 92vw, 46vw" width="1161" height="1355" loading="lazy" decoding="async" alt="Aceeași litofanie stinsă, ziua: abajurul pare un relief alb"></div>
+      <span class="chip glass l" aria-hidden="true">Stinsă</span><span class="chip glass r" aria-hidden="true">Aprinsă</span>
+      <input type="range" min="0" max="100" value="50" id="compareRange" aria-label="Glisează între litofania stinsă și aprinsă">
+      <div class="compare-line" aria-hidden="true"><span class="knob glass"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+    </div>
+    <div class="personal-copy">
+      <p class="cap muted">Litofanie personalizată</p>
+      <h2 class="title" id="h-per">Din fotografia ta, în trei pași</h2>
+      <ol class="steps">
+        <li><span class="n">01</span><div><h3>Alegi și încarci</h3><p>Soclul, culoarea, inelul și fotografia. O poză clară, cu fețe bine luminate, dă cel mai bun rezultat.</p></div></li>
+        <li><span class="n">02</span><div><h3>Aprobi previzualizarea</h3><p>Pregătim fotografia pentru litofanie și îți trimitem pe e-mail cum va arăta aprinsă. Printăm doar după ce confirmi.</p></div></li>
+        <li><span class="n">03</span><div><h3>Primești lampa</h3><p>Asamblată, testată și ambalată ca un cadou, cu cablu USB.</p></div></li>
+      </ol>
+      <button class="btn btn-ink" type="button" data-open="litofanie">Configurează litofania</button>
+    </div>
+  </section>
+  <section class="atelier wrap" id="atelier" aria-labelledby="h-atl">
+    <div class="sec-head">
+      <h2 class="title" id="h-atl">Atelier</h2>
+      <p class="body">Fiecare lampă e printată și asamblată manual, piesă cu piesă.</p>
+    </div>
+    <ol class="atelier-list" id="atelierList"></ol>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>© 2026 Lumis · lămpi printate 3D în România</span>
+    <span>Imaginile sunt randări digitale, nu fotografii ale produselor finite.</span>
+    <button class="link" type="button" data-info>Informații de prelansare</button>
+  </div>
+</footer>
+
+<dialog class="sheet" id="productDlg" aria-labelledby="pName">
+  <div class="sheet-body">
+    <button class="close" type="button" data-close aria-label="Închide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="viewer">
+      <div class="view-tabs seg" role="tablist" aria-label="Previzualizare">
+        <button type="button" role="tab" id="tab3d" aria-selected="true" aria-controls="pane3d"><span class="long">Configurația ta</span><span class="short">3D</span></button>
+        <button type="button" role="tab" id="tabPhoto" aria-selected="false" aria-controls="panePhoto"><span class="long">Fotografii de ambient</span><span class="short">Fotografii</span></button>
+      </div>
+      <div class="pane pane-3d" id="pane3d" role="tabpanel" aria-labelledby="tab3d">
+        <canvas id="studio" tabindex="0" aria-label="Model 3D al lămpii configurate. Trage sau folosește săgețile stânga și dreapta ca s-o rotești."></canvas>
+        <img class="studio-fallback" id="studioFallback" alt="" hidden>
+        <p class="studio-loading" id="studioLoading">Se pregătește modelul 3D…</p>
+        <div class="viewer-bar">
+          <div class="seg" id="litSeg" role="group" aria-label="Lampa">
+            <button type="button" data-lit="on" aria-pressed="true">Aprinsă</button>
+            <button type="button" data-lit="off" aria-pressed="false">Stinsă</button>
+          </div>
+          <button class="chip glass" type="button" id="resetView">Vedere din față</button>
+        </div>
+        <p class="viewer-note" id="viewerNote">Formele pieselor printate. Rotește lampa trăgând de ea.</p>
+      </div>
+      <div class="pane pane-photo" id="panePhoto" role="tabpanel" aria-labelledby="tabPhoto" hidden>
+        <img id="photoNight" alt="">
+        <img id="photoDay" alt="">
+        <p class="viewer-note">Fotografiile de ambient arată configurația standard, nu selecția ta.</p>
+      </div>
+    </div>
+    <form class="config" id="config" novalidate>
+      <p class="cap muted">Lampă</p>
+      <h2 class="title" id="pName">Litofanie</h2>
+      <div class="price-row"><p class="price" id="pPrice">Preț la lansare</p><button class="link" type="button" id="copyLink">Copiază linkul</button></div>
+      <p class="body" id="pLong"></p>
+      <fieldset><legend>Soclu · <span class="val" id="vBase"></span></legend><div class="seg opts" id="optBase"></div></fieldset>
+      <fieldset><legend>Culoarea soclului · <span class="val" id="vColor"></span></legend><div class="swatches" id="optColor"></div></fieldset>
+      <fieldset><legend>Inel · <span class="val" id="vRing"></span></legend><div class="seg opts" id="optRing"></div></fieldset>
+      <div class="photo-field" id="photoField">
+        <p class="legend">Fotografia</p>
+        <label class="upload" for="photoInput">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+          <span><b id="photoLabel">Încarcă o fotografie</b><small>Rămâne pe dispozitivul tău. Nu se trimite și nu se salvează în coș.</small></span>
+          <input type="file" id="photoInput" accept="image/*">
+        </label>
+        <fieldset class="placement" id="placeField" hidden><legend>Așezarea fotografiei · <span class="val" id="vPlace"></span></legend><div class="seg opts" id="optPlace"></div></fieldset>
+        <button class="link" type="button" id="photoClear" hidden>Revino la mostră</button>
+      </div>
+      <div class="buy">
+        <div class="qty" role="group" aria-label="Cantitate">
+          <button type="button" id="qtyMinus" aria-label="Scade cantitatea">−</button>
+          <output id="qtyVal" aria-live="polite">1</output>
+          <button type="button" id="qtyPlus" aria-label="Crește cantitatea">+</button>
+        </div>
+        <button class="btn btn-ink add" type="submit" id="addBtn">Adaugă în coș</button>
+      </div>
+      <p class="fine" id="personalNote">Pentru litofanie, fotografia o trimiți separat, după ce confirmăm comanda.</p>
+      <div class="specs" id="specs"></div>
+    </form>
+  </div>
+</dialog>
+
+<dialog class="drawer" id="cartDlg" aria-labelledby="cartTitle">
+  <div class="drawer-head">
+    <h2 class="title" id="cartTitle">Coș</h2>
+    <button class="close" type="button" data-close aria-label="Închide coșul"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <ul class="lines" id="lines"></ul>
+  <p class="empty" id="cartEmpty">Coșul e gol.</p>
+  <div class="drawer-foot" id="cartFoot">
+    <p class="sub"><span>Subtotal</span><span id="subtotal"></span></p>
+    <button class="btn btn-ink" type="button" disabled aria-describedby="checkoutNote">Finalizează comanda</button>
+    <p class="fine" id="checkoutNote">Comenzile online nu sunt încă deschise. Poți copia selecția și ne-o poți trimite.</p>
+    <div class="drawer-actions">
+      <button class="link" type="button" id="copySel">Copiază selecția</button>
+      <button class="link" type="button" id="clearCart">Golește coșul</button>
+    </div>
+    <textarea id="selOut" rows="6" readonly hidden aria-label="Selecția ta, ca text"></textarea>
+  </div>
+</dialog>
+
+<dialog class="info" id="infoDlg" aria-labelledby="infoTitle">
+  <button class="close" type="button" data-close aria-label="Închide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <h2 class="title" id="infoTitle">Informații de prelansare</h2>
+  <ul class="info-list">
+    <li>Prețurile, livrarea și datele firmei vor fi anunțate la lansare.</li>
+    <li>Comenzile și plata online nu sunt încă active. Coșul îți păstrează selecția doar pe acest dispozitiv.</li>
+    <li>Imaginile sunt randări digitale. Modelul 3D din configurator are formele și dimensiunile pieselor care se printează; lumina din el este o ilustrare, nu o măsurătoare.</li>
+    <li>Fotografia pentru litofanie se prelucrează doar în browserul tău. Nu o trimitem și nu o salvăm.</li>
+    <li>Termenii, politica de confidențialitate și condițiile de retur vor fi publicate înainte de deschiderea comenzilor.</li>
+    <li>Soluționarea alternativă a litigiilor: <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener">ANPC · SAL</a>.</li>
+  </ul>
+</dialog>
+
+<div class="island" id="island" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="islandMsg"></span></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
