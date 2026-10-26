@@ -1,0 +1,14 @@
+ok       abajur-wave          surplomb     0.0 mm2                          punți  159.1 mm2
+ok       abajur-twist         surplomb     0.0 mm2                          punți  159.1 mm2
+ok       abajur-ribbed        surplomb     0.0 mm2                          punți  159.1 mm2
+ok       soclu-galet          surplomb    11.2 mm2 la z = 23.7..24.1 mm     punți   15.7 mm2
+ok       capac-jos-galet      surplomb     0.0 mm2                          punți  405.7 mm2
+ok       soclu-monolit        surplomb    11.2 mm2 la z = 23.7..24.1 mm     punți   15.7 mm2
+ok       capac-jos-monolit    surplomb     0.0 mm2                          punți  405.7 mm2
+ok       soclu-con            surplomb    13.0 mm2 la z = 0.8..24.1 mm      punți   15.7 mm2
+ok       capac-jos-con        surplomb     0.0 mm2                          punți  405.7 mm2
+ok       difuzor              surplomb     0.0 mm2                          punți    0.0 mm2
+ok       inel                 surplomb     0.0 mm2                          punți    0.0 mm2
+ok       soclu-galet         iese din profil 0.00 mm
+ok       soclu-monolit       iese din profil 0.00 mm
+ok       soclu-con           iese din profil 0.00 mm

@@ -1,5 +1,15 @@
 # LUMIS — site, imagini și predare pentru Claude
 
+## Propunere nouă de design și audit independent
+
+- **[Raport pentru Claude](propuneri/chatgpt-2026-10-26/RAPORT-PENTRU-CLAUDE.md)** — defecte reproduse, corecții, măsurători STL și cote candidate.
+- **[Site și audit, arhivă de descărcat](livrare/LUMIS-propunere-ChatGPT-site-si-audit.zip?raw=true)**
+- **[Cele 10 imagini noi PNG, arhivă de descărcat](livrare/LUMIS-propunere-ChatGPT-imagini-master.zip?raw=true)**
+- **[Capturi comparative înainte/după](propuneri/chatgpt-2026-10-26/capturi/)**
+- **[Sursele complete ale propunerii](propuneri/chatgpt-2026-10-26/sursa-propusa/)**
+
+Propunerea este pentru review-ul și integrarea lui Claude. Include Manrope pentru interfață, texte revizuite și imagini mai detaliate, păstrând logoul LUMIS și cele patru lămpi. Corecțiile tehnice sunt disponibile și ca patch separat; sursa propusă păstrează completările recente de pe `claude/lumis-v2`. Piesele STL originale și versiunea publicată de Claude nu au fost înlocuite automat.
+
 ## Actualizarea Claude din 26 octombrie 2026
 
 **Cel mai nou pachet primit** este păstrat separat, fără modificarea conținutului furnizat de Claude:

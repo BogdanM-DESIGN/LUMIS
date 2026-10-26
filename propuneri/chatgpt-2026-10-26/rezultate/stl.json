@@ -1,0 +1,266 @@
+[
+  {
+    "piece": "abajur-ribbed.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      122.17,
+      122.17,
+      182.0
+    ],
+    "bounds": [
+      [
+        -61.085,
+        -61.085,
+        26.0
+      ],
+      [
+        61.085,
+        61.085,
+        208.0
+      ]
+    ],
+    "volume_mm3": 60441.9,
+    "components": 1
+  },
+  {
+    "piece": "abajur-twist.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      111.672,
+      111.549,
+      182.0
+    ],
+    "bounds": [
+      [
+        -55.836,
+        -55.774,
+        26.0
+      ],
+      [
+        55.836,
+        55.774,
+        208.0
+      ]
+    ],
+    "volume_mm3": 59732.63,
+    "components": 1
+  },
+  {
+    "piece": "abajur-wave.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      117.72,
+      117.702,
+      182.0
+    ],
+    "bounds": [
+      [
+        -58.86,
+        -58.851,
+        26.0
+      ],
+      [
+        58.86,
+        58.851,
+        208.0
+      ]
+    ],
+    "volume_mm3": 59732.63,
+    "components": 1
+  },
+  {
+    "piece": "capac-jos-con.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      123.05,
+      123.003,
+      112.0
+    ],
+    "bounds": [
+      [
+        -61.525,
+        -61.525,
+        0.0
+      ],
+      [
+        61.525,
+        61.478,
+        112.0
+      ]
+    ],
+    "volume_mm3": 81170.12,
+    "components": 1
+  },
+  {
+    "piece": "capac-jos-galet.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      97.05,
+      96.989,
+      112.0
+    ],
+    "bounds": [
+      [
+        -48.525,
+        -48.525,
+        0.0
+      ],
+      [
+        48.525,
+        48.464,
+        112.0
+      ]
+    ],
+    "volume_mm3": 61952.58,
+    "components": 1
+  },
+  {
+    "piece": "capac-jos-monolit.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      112.05,
+      111.997,
+      112.0
+    ],
+    "bounds": [
+      [
+        -56.025,
+        -56.025,
+        0.0
+      ],
+      [
+        56.025,
+        55.972,
+        112.0
+      ]
+    ],
+    "volume_mm3": 72982.43,
+    "components": 1
+  },
+  {
+    "piece": "difuzor.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      46.0,
+      46.0,
+      112.8
+    ],
+    "bounds": [
+      [
+        -23.0,
+        -23.0,
+        3.2
+      ],
+      [
+        23.0,
+        23.0,
+        116.0
+      ]
+    ],
+    "volume_mm3": 17427.87,
+    "components": 1
+  },
+  {
+    "piece": "inel.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      115.6,
+      115.6,
+      3.7
+    ],
+    "bounds": [
+      [
+        -57.8,
+        -57.8,
+        35.4
+      ],
+      [
+        57.8,
+        57.8,
+        39.1
+      ]
+    ],
+    "volume_mm3": 3527.26,
+    "components": 1
+  },
+  {
+    "piece": "soclu-con.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      132.69,
+      132.69,
+      32.0
+    ],
+    "bounds": [
+      [
+        -66.345,
+        -66.345,
+        4.0
+      ],
+      [
+        66.345,
+        66.345,
+        36.0
+      ]
+    ],
+    "volume_mm3": 65531.92,
+    "components": 1
+  },
+  {
+    "piece": "soclu-galet.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      128.793,
+      128.793,
+      32.0
+    ],
+    "bounds": [
+      [
+        -64.397,
+        -64.397,
+        4.0
+      ],
+      [
+        64.397,
+        64.397,
+        36.0
+      ]
+    ],
+    "volume_mm3": 75083.76,
+    "components": 1
+  },
+  {
+    "piece": "soclu-monolit.stl",
+    "watertight": true,
+    "winding_consistent": true,
+    "extents_mm": [
+      128.0,
+      128.0,
+      32.0
+    ],
+    "bounds": [
+      [
+        -64.0,
+        -64.0,
+        4.0
+      ],
+      [
+        64.0,
+        64.0,
+        36.0
+      ]
+    ],
+    "volume_mm3": 80573.3,
+    "components": 1
+  }
+]

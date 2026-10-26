@@ -1,0 +1,15 @@
+ok   collection images are visible (304,304,304,304)
+DIAG {"y":1479,"top":-335.96875,"h":1920,"offset":1143,"on":false,"visibility":"visible","dusk":""}
+DIAG {"y":1815,"top":-671.96875,"h":1920,"offset":1143,"on":false,"visibility":"visible","dusk":""}
+DIAG {"y":1725,"top":-581.96875,"h":1920,"offset":1143,"on":false,"visibility":"visible","dusk":""}
+DIAG {"y":1647,"top":-503.96875,"h":1920,"offset":1143,"on":false,"visibility":"visible","dusk":""}
+FAIL lamp switch keeps its hysteresis ([false,false,false,false])
+ok   3D preview restarts on every opening (3/3)
+ok   identical lines merge ([{"product":"twist","base":"monolit","color":"negru","ring":"champagne","qty":2}])
+ok   cart restores after reload
+ok   corrupt storage starts an empty cart
+ok   a direct link opens the configured lamp (Twist/Con/Grafit)
+CLOSE_DIAG { open: false, active: '', visibility: 'visible' }
+FAIL the link follows the configuration and clears on close (#lampa/twist/galet/grafit/lumina -> "#lampa/twist/galet/grafit/lumina")
+ok   an unknown link leaves the sheet closed
+ok   no page errors or failed requests

@@ -1,0 +1,13 @@
+--- a/sursa/lampa/spec.json
++++ b/sursa/lampa/spec.json
+@@ -198,8 +198,8 @@
+     "pin_length": 1.6
+   },
+   "ring": {
+-    "r_in": 54.6,
+-    "r_out": 57.8,
++    "r_in": 55.2,
++    "r_out": 57.3,
+     "height": 3.1,
+     "seat_depth": 0.6,
+     "reveal": 0.45

@@ -1,0 +1,5 @@
+/tmp/lumis-audit-deps/trimesh/triangles.py:302: RuntimeWarning: invalid value encountered in divide
+  center_mass = integrated[1:4] / volume
+{"base": "galet", "candidate_ring": {"r_in": 55.2, "r_out": 57.3}, "issues": []}
+{"base": "monolit", "candidate_ring": {"r_in": 55.2, "r_out": 57.3}, "issues": []}
+{"base": "con", "candidate_ring": {"r_in": 55.2, "r_out": 57.3}, "issues": []}

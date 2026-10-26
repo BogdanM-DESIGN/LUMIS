@@ -1,0 +1,5 @@
+/tmp/lumis-audit-deps/trimesh/triangles.py:302: RuntimeWarning: invalid value encountered in divide
+  center_mass = integrated[1:4] / volume
+ok       lampă cu soclu galet
+ok       lampă cu soclu monolit
+ok       lampă cu soclu con

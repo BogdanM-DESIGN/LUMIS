@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "httpRequests": 0,
+  "pageErrors": [],
+  "method": "complete embedded HTML loaded as document; not file scheme",
+  "checks": [
+    "3D",
+    "configuration",
+    "photo",
+    "cart",
+    "close clears photo"
+  ]
+}

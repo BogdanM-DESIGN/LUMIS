@@ -1,0 +1,27 @@
+✔ identical configurations merge, different ones stay separate (2.66865ms)
+✔ quantity is clamped to 1..MAX_QTY, including when merging (1.378627ms)
+✔ adding does not mutate the previous state (0.252252ms)
+✔ remove drops only the matching line (1.894654ms)
+✔ subtotal reports unpriced items instead of inventing a total (0.3228ms)
+✔ restore survives corrupt, foreign and missing storage (1.228546ms)
+✔ persist never stores photos or file names, and reports failure (0.699498ms)
+✔ export lists the selection without personal data (1.17152ms)
+✔ shade wave: site radius equals print radius (3.119644ms)
+✔ shade twist: site radius equals print radius (2.327025ms)
+✔ shade ribbed: site radius equals print radius (1.650896ms)
+✔ shade litho: site radius equals print radius (0.161479ms)
+✔ base galet: site profile equals print profile (0.794282ms)
+✔ base monolit: site profile equals print profile (0.279581ms)
+✔ base con: site profile equals print profile (0.663279ms)
+✔ default configuration gives a short link (2.15582ms)
+✔ custom configuration round-trips (1.442998ms)
+✔ short link opens with the model defaults (0.495881ms)
+✔ unknown ids are rejected or replaced by defaults (0.359599ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 318.900568

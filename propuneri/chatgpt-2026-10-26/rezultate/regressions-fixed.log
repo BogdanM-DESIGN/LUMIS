@@ -1,0 +1,11 @@
+{
+  "passed": 5,
+  "checks": [
+    "late photo decode cannot restore a closed product photo",
+    "changing a direct link in an open sheet keeps the new context and link",
+    "delayed module import does not allocate a renderer on a detached canvas",
+    "photo type and byte limits reject invalid input before decoding",
+    "viewer controls do not cover the note at 360, 390 and 768 px"
+  ],
+  "pageErrors": []
+}

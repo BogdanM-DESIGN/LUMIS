@@ -1,0 +1,10 @@
+ok   collection images are visible (304,304,304,304)
+FAIL lamp switch keeps its hysteresis ([true,true,true,true])
+ok   3D preview restarts on every opening (3/3)
+ok   identical lines merge ([{"product":"twist","base":"monolit","color":"negru","ring":"champagne","qty":2}])
+ok   cart restores after reload
+ok   corrupt storage starts an empty cart
+ok   a direct link opens the configured lamp (Twist/Con/Grafit)
+FAIL the link follows the configuration and clears on close (#lampa/twist/galet/grafit/lumina -> "#lampa/twist/galet/grafit/lumina")
+ok   an unknown link leaves the sheet closed
+ok   no page errors or failed requests

@@ -1,0 +1,355 @@
+--- a/sursa/js/main.js
++++ b/sursa/js/main.js
+@@ -95,6 +95,34 @@
+ ['wheel', 'touchstart', 'keydown'].forEach((ev) => addEventListener(ev, () => stopTour(), { passive: true }));
+ addEventListener('pointerdown', (e) => { if (!tourBtn.contains(e.target)) stopTour(); });
+ document.addEventListener('visibilitychange', () => { if (document.hidden) stopTour(); });
++
++/* ---------- mouse wheel: a short inertial finish ---------- */
++// Only for notched mouse wheels. Trackpads already have native momentum (small pixel deltas), and touch,
++// keyboard, zoom, horizontal scrolling and open dialogs stay native. Any other scroll cancels it.
++let wheelTarget = 0, wheelPos = 0, wheelRaf = 0, wheelLast = 0;
++function wheelCancel() { cancelAnimationFrame(wheelRaf); wheelRaf = 0; }
++function wheelStep(now) {
++  const dt = Math.min(40, now - wheelLast || 16.7);
++  wheelLast = now;
++  if (Math.abs(window.scrollY - wheelPos) > 2) { wheelCancel(); return; } // something else scrolled
++  const d = wheelTarget - wheelPos;
++  if (Math.abs(d) < 0.6) { window.scrollTo(0, wheelTarget); wheelRaf = 0; return; }
++  wheelPos += d * (1 - Math.exp(-dt / 85));
++  window.scrollTo(0, wheelPos);
++  wheelRaf = requestAnimationFrame(wheelStep);
++}
++addEventListener('wheel', (e) => {
++  if (reduce() || e.ctrlKey || e.metaKey || e.shiftKey || e.defaultPrevented || document.querySelector('dialog[open]')) return;
++  if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
++  if (e.deltaMode === 0 && Math.abs(e.deltaY) < 45) return; // trackpad
++  if (e.target.closest?.('input, textarea, select, [contenteditable]')) return;
++  e.preventDefault();
++  if (!wheelRaf) { wheelTarget = wheelPos = window.scrollY; }
++  const px = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
++  wheelTarget = Math.max(0, Math.min(document.documentElement.scrollHeight - innerHeight, wheelTarget + px));
++  if (!wheelRaf) { wheelLast = performance.now(); wheelRaf = requestAnimationFrame(wheelStep); }
++}, { passive: false });
++['pointerdown', 'touchstart', 'keydown'].forEach((ev) => addEventListener(ev, wheelCancel, { passive: true }));
+ 
+ /* ---------- atelier: text now, real photos when they exist ---------- */
+ $('#atelierList').innerHTML = ATELIER.map((a) => `<li>
+@@ -137,14 +165,14 @@
+ /* ---------- dialogs: remember who opened them, give focus back on close ---------- */
+ const openers = new WeakMap();
+ function openDialog(dlg, opener) {
+-  stopTour();
++  stopTour(); wheelCancel();
+   openers.set(dlg, opener || document.activeElement);
+   dlg.showModal();
+ }
+ $$('dialog').forEach((dlg) => {
+   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+   $$('[data-close]', dlg).forEach((b) => b.addEventListener('click', () => dlg.close()));
+-  dlg.addEventListener('close', () => { const o = openers.get(dlg); if (o && o.isConnected) o.focus(); });
++  dlg.addEventListener('close', () => { if (dlg.open) return; const o = openers.get(dlg); if (o && o.isConnected) o.focus(); });
+ });
+ $('[data-info]').addEventListener('click', (e) => openDialog($('#infoDlg'), e.currentTarget));
+ 
+@@ -152,6 +180,7 @@
+ const dlg = $('#productDlg'), form = $('#config'), viewer = $('.viewer', dlg);
+ const sel = { product: null, base: null, color: null, ring: null, qty: 1, lit: true };
+ let studio = null, studioMod = null, photoCanvas = null, photoImg = null, placement = 'wrap';
++let productSession = 0, photoRequest = 0;
+ 
+ const radios = (name, list, swatch) => list.map((o) => `
+   <label><input type="radio" name="${name}" value="${o.id}" id="${name}-${o.id}"${swatch ? ` aria-label="${esc(o.name)}"` : ''}>
+@@ -226,8 +255,11 @@
+   const file = e.target.files?.[0];
+   e.target.value = ''; // the file is not kept by the form either
+   if (!file) return;
++  const request = ++photoRequest, session = productSession;
+   try {
+-    photoImg = await readPhoto(file);
++    const image = await readPhoto(file);
++    if (request !== photoRequest || session !== productSession || !dlg.open) return;
++    photoImg = image;
+     placement = suggestPlacement(photoImg);
+     applyPhoto();
+     $('#photoLabel').textContent = 'Fotografia ta e pe lampă';
+@@ -235,7 +267,8 @@
+     $('#placeField').hidden = false;
+     if (sel.lit === false) $('#viewerNote').textContent = 'Stinsă, fotografia se vede doar ca relief. Aprinde lampa ca s-o vezi.';
+   } catch {
+-    $('#photoLabel').textContent = 'Fișierul nu poate fi citit. Alege o imagine JPG sau PNG.';
++    if (request !== photoRequest || session !== productSession || !dlg.open) return;
++    $('#photoLabel').textContent = 'Alege JPG, PNG sau WebP de maximum 12 MB și 40 megapixeli.';
+   }
+ });
+ function applyPhoto() {
+@@ -246,6 +279,7 @@
+   requestAnimationFrame(() => placePlace(true));
+ }
+ function clearPhoto() {
++  photoRequest++;
+   photoCanvas = null; photoImg = null;
+   $('#placeField').hidden = true;
+ }
+@@ -255,19 +289,21 @@
+   $('#photoClear').hidden = true;
+ });
+ 
+-async function ensureStudio() {
++async function ensureStudio(session) {
+   // a canvas whose context was released cannot host a new one, so every opening gets a fresh canvas
+   const old = $('#studio'), canvas = old.cloneNode(false);
+   old.replaceWith(canvas);
+   const fallback = $('#studioFallback'), loading = $('#studioLoading');
+   try {
+     studioMod = studioMod || await import('./studio.js');
++    if (session !== productSession || !dlg.open || !canvas.isConnected) return;
+     if (!studioMod.webglAvailable()) throw new Error('no-webgl');
+     studio = studioMod.createStudio(canvas, { reduceMotion: reduce() });
+     canvas.hidden = false; fallback.hidden = true; loading.hidden = true;
+     $('#litSeg').hidden = false; $('#resetView').hidden = false;
+     $('#viewerNote').textContent = 'Formele pieselor printate. Trage de lampă sau folosește săgețile ca s-o rotești.';
+   } catch (err) {
++    if (session !== productSession || !dlg.open) return;
+     console.warn('Previzualizarea 3D nu a pornit:', err?.message || err);
+     studio = null; canvas.hidden = true; loading.hidden = true;
+     const p = byId(PRODUCTS, sel.product);
+@@ -278,6 +314,11 @@
+ }
+ 
+ async function openProduct(id, opener, config = null) {
++  const session = ++productSession;
++  disposeStudio();
++  clearPhoto();
++  $('#photoLabel').textContent = 'Încarcă o fotografie';
++  $('#photoClear').hidden = true;
+   const p = byId(PRODUCTS, id);
+   Object.assign(sel, { product: id, ...p.defaults, ...(config || {}), qty: 1 });
+   $('#pName').textContent = p.name;
+@@ -286,12 +327,12 @@
+   $('#photoNight').src = p.images.night.src; $('#photoNight').alt = `Randare de ambient: ${p.photoAlt}, seara`;
+   $('#photoDay').src = p.images.day.src; $('#photoDay').alt = `Randare de ambient: ${p.photoAlt}, ziua`;
+   $('#studioLoading').hidden = false;
+-  if (dlg.open) dlg.close();
+-  openDialog(dlg, opener);
++  if (!dlg.open) openDialog(dlg, opener);
++  else if (opener) openers.set(dlg, opener);
+   setHash(linkHash(sel));
+   showTab(false);
+-  await ensureStudio();
+-  if (!dlg.open) { disposeStudio(); return; }
++  await ensureStudio(session);
++  if (session !== productSession || !dlg.open) return;
+   if (photoCanvas && p.personal) studio?.setPhoto(photoCanvas);
+   setLit(true, false);
+   syncConfig(false);
+@@ -300,6 +341,8 @@
+ }
+ function disposeStudio() { studio?.dispose(); studio = null; }
+ dlg.addEventListener('close', () => {
++  if (dlg.open) return; // ignore an older close event delivered after the sheet reopened
++  productSession++;
+   setHash('');
+   disposeStudio();
+   clearPhoto(); // the photo lives only while the sheet is open
+--- a/sursa/js/litho.js
++++ b/sursa/js/litho.js
+@@ -92,9 +92,16 @@
+ 
+ export function readPhoto(file) {
+   return new Promise((resolve, reject) => {
+-    if (!file || !/^image\//.test(file.type)) { reject(new Error('type')); return; }
++    if (!file || !['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) { reject(new Error('type')); return; }
++    if (file.size > 12 * 1024 * 1024) { reject(new Error('size')); return; }
+     const url = URL.createObjectURL(file), im = new Image();
+-    im.onload = () => { URL.revokeObjectURL(url); resolve(im); };
++    im.onload = () => {
++      URL.revokeObjectURL(url);
++      if (!im.naturalWidth || !im.naturalHeight || im.naturalWidth * im.naturalHeight > 40_000_000) {
++        reject(new Error('dimensions')); return;
++      }
++      resolve(im);
++    };
+     im.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode')); };
+     im.src = url;
+   });
+--- a/sursa/js/studio.js
++++ b/sursa/js/studio.js
+@@ -252,7 +252,7 @@
+   ro.observe(canvas);
+ 
+   const loader = new THREE.TextureLoader();
+-  loader.load('img/litofanie-mostra.webp', (t) => { t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); sampleTex = t; applyMaterials(); request(); });
++  loader.load('img/litofanie-mostra.webp', (t) => { if (!alive) { t.dispose(); return; } t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); sampleTex = t; applyMaterials(); request(); });
+ 
+   return {
+     set({ shade: kind, base: b, color, ring: r }) {
+--- a/sursa/lampa/litofanie.py
++++ b/sursa/lampa/litofanie.py
+@@ -81,7 +81,8 @@
+ 
+ 
+ def make(photo_path, mode=None, nth=1024, nz=512):
+-    img = Image.open(photo_path)
++    with Image.open(photo_path) as source:
++        img = ImageOps.exif_transpose(source).convert('RGB')
+     mode = ALIASES.get(mode, mode) or suggest(img)
+     v = litho_map(img, mode)
+     body = geom.shade_body('litho', nth=nth, nz=nz, thickness=thickness_fn(v))
+--- a/sursa/lampa/overhang.py
++++ b/sursa/lampa/overhang.py
+@@ -52,12 +52,19 @@
+     return max(out)
+ 
+ 
++def needs_bridge_review(m):
++    # A flat downward face may bridge or cantilever: normals alone cannot establish support.
++    return unsupported(m)[2] > MIN_AREA
++
++
+ if __name__ == '__main__':
+     worst = 0
++    review_bridges = False
+     for name, (mesh, flip) in generate.parts(quick=True).items():
+         m = generate.place_on_bed(mesh, flip)
+         area, zs, barea, bc = unsupported(m)
+         worst = max(worst, area)
++        review_bridges |= barea > MIN_AREA
+         where = f'la z = {zs.min():.1f}..{zs.max():.1f} mm' if len(zs) else ''
+         print(f"{'PROBLEMĂ' if area > MIN_AREA else 'ok':8s} {name:20s} surplomb {area:7.1f} mm2 {where:24s} punți {barea:6.1f} mm2")
+     bad = False
+@@ -65,4 +72,9 @@
+         o = outside_profile(k)
+         bad |= o > 0.05
+         print(f"{'PROBLEMĂ' if o > 0.05 else 'ok':8s} soclu-{k:13s} iese din profil {max(o, 0):.2f} mm")
+-    sys.exit(1 if worst > MIN_AREA or bad else 0)
++    if worst > MIN_AREA or bad:
++        sys.exit(1)
++    if review_bridges:
++        print('DE REVIZUIT: există fețe orizontale inferioare. Verifică ancorarea și punțile în slicer; normalele nu certifică printarea fără suporturi.')
++        sys.exit(2)
++    sys.exit(0)
+--- a/sursa/tests/browser-smoke.cjs
++++ b/sursa/tests/browser-smoke.cjs
+@@ -22,7 +22,7 @@
+ (async () => {
+   await new Promise((r) => server.listen(0, '127.0.0.1', r));
+   const url = `http://127.0.0.1:${server.address().port}/index.html`;
+-  const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
++  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--enable-unsafe-swiftshader'] });
+   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+   const errors = [];
+   page.on('pageerror', (e) => errors.push(e.message));
+@@ -39,7 +39,7 @@
+   // the room: switch on at 0.55, stay on at 0.52, switch off below 0.5
+   const at = async (p) => {
+     await page.evaluate((p) => { const s = document.getElementById('poveste'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * p); }, p);
+-    await page.waitForTimeout(150);
++    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+     return page.evaluate(() => document.getElementById('poveste').classList.contains('on'));
+   };
+   const seq = [await at(0.3), await at(0.6), await at(0.52), await at(0.45)];
+@@ -71,6 +71,19 @@
+   await page.reload({ waitUntil: 'networkidle' });
+   check('corrupt storage starts an empty cart', (await page.textContent('#cartCount')) === '0');
+ 
++  // mouse wheel: eases to exactly the requested distance; small trackpad deltas stay native (instant)
++  await page.goto(url, { waitUntil: 'networkidle' });
++  await page.evaluate(() => scrollTo(0, 400));
++  await page.mouse.move(600, 400);
++  await page.mouse.wheel(0, 300);
++  const mid = await page.evaluate(() => scrollY);
++  await page.waitForTimeout(900);
++  const end = await page.evaluate(() => scrollY);
++  await page.mouse.wheel(0, 20);
++  await page.waitForTimeout(50);
++  const pad = await page.evaluate(() => scrollY);
++  check('mouse wheel eases to the exact distance, trackpad stays native', mid < 700 && Math.abs(end - 700) < 1 && Math.abs(pad - 720) < 1, `${mid} -> ${end}, +20 -> ${pad}`);
++
+   // direct links: a link opens the configured lamp, choices update it, closing removes it
+   await page.goto(url + '#lampa/twist/con/grafit/lumina', { waitUntil: 'networkidle' });
+   await page.waitForFunction(() => document.getElementById('productDlg').open && document.getElementById('studioLoading').hidden, null, { timeout: 15000 });
+@@ -80,6 +93,7 @@
+   const h1 = await page.evaluate(() => location.hash);
+   await page.keyboard.press('Escape');
+   await page.waitForTimeout(200);
++  await page.waitForFunction(() => location.hash === '');
+   const h2 = await page.evaluate(() => location.hash);
+   check('the link follows the configuration and clears on close', h1 === '#lampa/twist/galet/grafit/lumina' && h2 === '', `${h1} -> "${h2}"`);
+   await page.goto(url + '#lampa/nu-exista', { waitUntil: 'networkidle' });
+--- a/sursa/netlify.toml
++++ b/sursa/netlify.toml
+@@ -12,9 +12,9 @@
+ [[headers]]
+   for = "/img/*"
+   [headers.values]
+-    Cache-Control = "public, max-age=31536000, immutable"
++    Cache-Control = "public, max-age=0, must-revalidate"
+ 
+ [[headers]]
+   for = "/fonts/*"
+   [headers.values]
+-    Cache-Control = "public, max-age=31536000, immutable"
++    Cache-Control = "public, max-age=0, must-revalidate"
+--- a/sursa/lampa/GHID-PRINT.md
++++ b/sursa/lampa/GHID-PRINT.md
+@@ -1,6 +1,6 @@
+ # LUMIS: ghid de fabricație
+ 
+-Toate piesele se generează din `spec.json` cu `python lampa/generate.py`. Site-ul citește aceleași dimensiuni, deci lampa printată are exact forma din configurator.
++Toate piesele se generează din `spec.json` cu `python lampa/generate.py`. Site-ul citește aceiași parametri pentru forma exterioară. Rezultatul printat depinde de filament, slicer și calibrarea imprimantei; previzualizarea nu validează toleranțele sau funcționarea.
+ 
+ > **Important:** piesele au fost verificate în calculator (sunt solide închise, nu se intersectează și știfturile cad în canale), dar **nu au fost printate încă**. Toleranțele de îmbinare trebuie confirmate cu un print de test (pasul 1 de mai jos).
+ 
+@@ -26,9 +26,9 @@
+ - Bandă LED 5 V USB, alb cald (2700–3000 K), **SMD2835, 60 LED/m, lățime 8 mm, 50 cm**, autoadezivă, cu întrerupător pe cablu. Grosimea cu tot cu LED-uri: **maximum 2,6 mm** (cele cu 2835 au de obicei ~1,6–2 mm; benzile 5050 sunt prea groase). Cablul: rotund, **maximum Ø4 mm**. La 60 LED/m, 50 cm consumă aproximativ 2,4–3 W, adică LED-ul de 5 V / 3 W declarat pe site. Verifică puterea exactă a benzii pe care o cumperi.
+ - Încărcător USB de 5 V, minimum 1 A.
+ - Alice de oțel pentru greutate, plus adeziv (epoxy sau silicon). Cât încape în tavă: **Galet ~150 g, Monolit și Con ~250 g**.
+-- 3 șuruburi autofiletante pentru plastic, M3 × 8 (merge și × 10, **nu mai lungi**), **cap bombat (pan head)** cu diametrul capului de maximum 6 mm, de exemplu DIN 7981 sau ISO 7045. Intră în găurile de 2,6 mm din cele 3 bosaje, iar capul stă îngropat în capac.
++- 3 șuruburi pentru plastic, cu cap bombat, alese ca un singur reper comercial și confirmate pe un cupon de print. DIN 7981 (autofiletant, dimensiune ST) și ISO 7045 (filet metric M) nu sunt repere interschimbabile. Geometria actuală modelează un cap Ø5,6 × 2,2 mm, lungime sub cap 8 mm, pilot Ø2,6 mm. Nu a fost verificat filetul sau cuplul de strângere; măsoară reperul ales și adaptează pilotul la recomandările lui.
+ - 4 picioare de pâslă autoadezive, Ø10 mm.
+-- Opțional: un colier mic pentru fixarea cablului.
++- De proiectat și verificat: o ancorare mecanică a cablului care să preia tragerea fără solicitarea lipiturilor sau contactelor benzii. Canalul și colierul liber nu demonstrează o astfel de ancorare.
+ 
+ ## Designul soclului (v2)
+ 
+@@ -66,5 +66,5 @@
+ 
+ - Toleranța baionetei și cât de ușor se rotește: trebuie un print de test.
+ - Cât de uniform luminează banda LED prin difuzor și abajur.
+-- Încălzirea: la 3 W ar trebui să rămână rece, dar verifică după o oră de funcționare.
++- Încălzirea: puterea de 3 W nu garantează că PLA-ul sau banda LED rămân reci. Pe un prototip supravegheat, măsoară temperatura ambiantă, banda, suportul și punctele apropiate de PLA la pornire, după 15/30/60 minute și până la stabilizare, inclusiv în condițiile maxime de utilizare declarate. Compară măsurătorile cu limitele componentelor și filamentului alese. Un test de o oră sau un rezultat CAD nu certifică siguranța; nu lăsa primul prototip nesupravegheat.
+ - Contrastul litofaniei reale, cu filamentul ales. Se ajustează din `t_min` / `t_max` în `spec.json`.
+--- a/sursa/docs/legal/termeni.md
++++ b/sursa/docs/legal/termeni.md
+@@ -38,7 +38,7 @@
+ 
+ ## 8. Reclamații și litigii
+ 
+-Reclamațiile se trimit la [E-MAIL]; răspundem în cel mult [14 ZILE]. Poți apela și la ANPC, la procedura SAL (https://anpc.ro/ce-este-sal/) sau la platforma europeană SOL.
++Reclamațiile se trimit la [E-MAIL]; răspundem în cel mult [14 ZILE]. Poți apela și la ANPC, la procedura SAL (https://anpc.ro/ce-este-sal/).
+ 
+ ## 9. Legea aplicabilă
+ 
+--- a/sursa/docs/legal/livrare-retur.md
++++ b/sursa/docs/legal/livrare-retur.md
+@@ -8,7 +8,7 @@
+ 
+ ## Dreptul de retragere
+ 
+-Pentru lămpile din colecție (Wave, Twist, Ribbed), ai 14 zile de la primire ca să te retragi din contract, fără motiv. Ne anunți la [E-MAIL] sau prin formularul de retragere din anexa OUG 34/2014. Returnezi produsul în cel mult 14 zile de la anunț; costul returului îl suporți tu, [DACĂ NU SE STABILEȘTE ALTFEL]. Rambursăm suma în cel mult 14 zile de la primirea produsului înapoi.
++Pentru lămpile din colecție (Wave, Twist, Ribbed), ai 14 zile de la primire ca să te retragi din contract, fără motiv. Ne anunți la [E-MAIL] sau prin formularul de retragere din anexa OUG 34/2014. Returnezi produsul în cel mult 14 zile de la anunț; costul returului îl suporți tu, [DACĂ NU SE STABILEȘTE ALTFEL]. Rambursăm sumele datorate în cel mult 14 zile de la informarea privind retragerea. În condițiile legii, putem amâna rambursarea până la primirea bunului sau a dovezii expedierii lui, luând în considerare prima dintre aceste date. **(de verificat de avocat, inclusiv excepțiile și costul livrării standard)**
+ 
+ **Litofania, fiind realizată după fotografia ta, este un produs personalizat.** Pentru produsele realizate după specificațiile clientului sau personalizate clar, legea permite excepția de la dreptul de retragere. **(de verificat formularea exactă și cum se informează clientul înainte de comandă: probabil o bifă separată în pasul de plată)**
+ 
+--- a/sursa/docs/legal/CITESTE-INTAI.md
++++ b/sursa/docs/legal/CITESTE-INTAI.md
+@@ -4,7 +4,7 @@
+ 
+ Tot ce e între `[PARANTEZE]` trebuie completat cu datele reale. Prevederile marcate **(de verificat)** depind de forma juridică a firmei, de procesatorul de plăți și de curier.
+ 
+-Repere pe care avocatul le va verifica, probabil: OUG 34/2014 (contracte la distanță), Legea 365/2002 (comerț electronic), Regulamentul (UE) 2016/679 (GDPR), OG 21/1992 (protecția consumatorilor), Legea 449/2003 și regulile noi privind garanția conformității (OUG 140/2021), plus obligațiile privind SAL/SOL ale ANPC.
++Repere pe care avocatul le va verifica, probabil: OUG 34/2014 (contracte la distanță), Legea 365/2002 (comerț electronic), Regulamentul (UE) 2016/679 (GDPR), OG 21/1992 (protecția consumatorilor), OUG 140/2021 pentru conformitatea bunurilor, plus obligațiile actuale privind SAL ale ANPC. Verifică formele consolidate și aplicabilitatea pentru produs. Vechea platformă europeană SOL/ODR nu mai este un canal activ.
+ 
+ | Fișier | Conține |
+ |---|---|

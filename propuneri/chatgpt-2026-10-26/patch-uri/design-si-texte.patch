@@ -1,0 +1,212 @@
+--- a/sursa/index.html
++++ b/sursa/index.html
+@@ -7,7 +7,7 @@
+ <meta name="description" content="Lămpi printate 3D și asamblate manual în România: Litofanie, Wave, Twist și Ribbed.">
+ <meta name="theme-color" content="#F7F7F6">
+ <link rel="preload" href="fonts/bodoni-latin.woff2" as="font" type="font/woff2" crossorigin>
+-<link rel="preload" href="fonts/instrument-latin.woff2" as="font" type="font/woff2" crossorigin>
++<link rel="preload" href="fonts/manrope-variable.woff2" as="font" type="font/woff2" crossorigin>
+ <link rel="stylesheet" href="css/fonts.css">
+ <link rel="stylesheet" href="css/site.css">
+ </head>
+@@ -50,10 +50,10 @@
+ 
+   <div class="intro wrap">
+     <p class="cap muted">Lumis acasă</p>
+-    <h2 class="title">Aceeași cameră, ziua și seara</h2>
+-  </div>
+-
+-  <section class="story" id="poveste" aria-label="Aceeași cameră, ziua și seara">
++    <h2 class="title">Ziua, forma. Seara, atmosfera.</h2>
++  </div>
++
++  <section class="story" id="poveste" aria-label="Ziua, forma. Seara, atmosfera.">
+     <div class="story-pin">
+       <div class="story-frame">
+         <img class="s-day" src="img/camera-zi-1920.webp" srcset="img/camera-zi-960.webp 960w, img/camera-zi-1920.webp 1920w" sizes="(max-width: 700px) 200vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async"
+@@ -70,8 +70,8 @@
+ 
+   <section class="collection wrap" id="colectie" aria-labelledby="h-col">
+     <div class="sec-head">
+-      <h2 class="title" id="h-col">Colecția</h2>
+-      <p class="body">Patru forme de abajur, trei socluri, patru culori. Treci peste o lampă ca s-o vezi stinsă, ziua. Deschide-o ca s-o configurezi.</p>
++      <h2 class="title" id="h-col">O formă care ți se potrivește.</h2>
++      <p class="body">Patru abajururi. Alege soclul, culoarea și inelul; vezi combinația în 3D.</p>
+     </div>
+     <ul class="grid" id="grid"></ul>
+   </section>
+@@ -86,11 +86,11 @@
+     </div>
+     <div class="personal-copy">
+       <p class="cap muted">Litofanie personalizată</p>
+-      <h2 class="title" id="h-per">Din fotografia ta, în trei pași</h2>
++      <h2 class="title" id="h-per">Dintr-o fotografie. Ceva de păstrat.</h2>
+       <ol class="steps">
+-        <li><span class="n">01</span><div><h3>Alegi și încarci</h3><p>Soclul, culoarea, inelul și fotografia. O poză clară, cu fețe bine luminate, dă cel mai bun rezultat.</p></div></li>
+-        <li><span class="n">02</span><div><h3>Aprobi previzualizarea</h3><p>Pregătim fotografia pentru litofanie și îți trimitem pe e-mail cum va arăta aprinsă. Printăm doar după ce confirmi.</p></div></li>
+-        <li><span class="n">03</span><div><h3>Primești lampa</h3><p>Asamblată, testată și ambalată ca un cadou, cu cablu USB.</p></div></li>
++        <li><span class="n">01</span><div><h3>Alegi fotografia și finisajele</h3><p>Încarcă o fotografie clară pentru simularea din browser. Apoi alege soclul, culoarea și inelul.</p></div></li>
++        <li><span class="n">02</span><div><h3>Verifici înainte de printare</h3><p>Fotografia se pregătește pentru litofanie. Previzualizarea finală se aprobă pe e-mail înainte de printare.</p></div></li>
++        <li><span class="n">03</span><div><h3>Primești lampa</h3><p>Cu cablu USB și instrucțiuni. Ambalarea și livrarea vor fi detaliate la lansare.</p></div></li>
+       </ol>
+       <button class="btn btn-ink" type="button" data-open="litofanie">Configurează litofania</button>
+     </div>
+@@ -98,7 +98,7 @@
+   <section class="atelier wrap" id="atelier" aria-labelledby="h-atl">
+     <div class="sec-head">
+       <h2 class="title" id="h-atl">Atelier</h2>
+-      <p class="body">Fiecare lampă e printată și asamblată manual, piesă cu piesă.</p>
++      <p class="body">Forme printate 3D, gândite piesă cu piesă. Colecția este în pregătire.</p>
+     </div>
+     <ol class="atelier-list" id="atelierList"></ol>
+   </section>
+@@ -118,7 +118,7 @@
+     <div class="viewer">
+       <div class="view-tabs seg" role="tablist" aria-label="Previzualizare">
+         <button type="button" role="tab" id="tab3d" aria-selected="true" aria-controls="pane3d"><span class="long">Configurația ta</span><span class="short">3D</span></button>
+-        <button type="button" role="tab" id="tabPhoto" aria-selected="false" aria-controls="panePhoto"><span class="long">Fotografii de ambient</span><span class="short">Fotografii</span></button>
++        <button type="button" role="tab" id="tabPhoto" aria-selected="false" aria-controls="panePhoto"><span class="long">Randări de ambient</span><span class="short">Ambient</span></button>
+       </div>
+       <div class="pane pane-3d" id="pane3d" role="tabpanel" aria-labelledby="tab3d">
+         <canvas id="studio" tabindex="0" aria-label="Model 3D al lămpii configurate. Trage sau folosește săgețile stânga și dreapta ca s-o rotești."></canvas>
+@@ -136,7 +136,7 @@
+       <div class="pane pane-photo" id="panePhoto" role="tabpanel" aria-labelledby="tabPhoto" hidden>
+         <img id="photoNight" alt="">
+         <img id="photoDay" alt="">
+-        <p class="viewer-note">Fotografiile de ambient arată configurația standard, nu selecția ta.</p>
++        <p class="viewer-note">Randări digitale, în configurația standard. Selecția ta apare doar în 3D.</p>
+       </div>
+     </div>
+     <form class="config" id="config" novalidate>
+--- a/sursa/css/site.css
++++ b/sursa/css/site.css
+@@ -295,3 +295,50 @@
+ @media (max-height: 560px) and (max-width: 1000px) {
+   .sheet-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: none; }
+ }
++
++/* Editorial proposal: readable Manrope text, Bodoni retained for the LUMIS identity. */
++:root { --sans: 'Manrope', 'Helvetica Neue', Arial, sans-serif; --muted: #62635E; --space: clamp(96px, 12vw, 176px); }
++body { font-size: 14px; line-height: 1.75; letter-spacing: 0; }
++.body { font-size: 14px; line-height: 1.85; max-width: 43ch; }
++.cap, .nav-links a, .btn, .cart, .tour { font-weight: 500; letter-spacing: .1em; }
++.title { font-family: var(--mark); font-size: clamp(29px, 3.2vw, 46px); line-height: 1.18; text-transform: none; letter-spacing: -.035em; text-wrap: balance; }
++.hero-mark { letter-spacing: .07em; }
++.hero-shade { background: linear-gradient(180deg, rgba(0,0,0,.14), transparent 45%, transparent 66%, rgba(0,0,0,.48)); }
++.hero-foot h1 { font-family: var(--mark); font-size: clamp(27px, 3vw, 44px); font-weight: 400; line-height: 1.18; letter-spacing: -.025em; text-transform: none; max-width: 18ch; }
++.hero-foot p { font-size: 11px; line-height: 1.8; margin-top: 12px; letter-spacing: .06em; }
++.hero-foot .btn { min-height: 50px; padding-inline: 30px; }
++.intro { gap: 20px; }
++.story-card .title { font-size: 28px; line-height: 1.2; }
++.sec-head { align-items: end; gap: 24px 60px; margin-bottom: 44px; }
++.sec-head .title { max-width: 19ch; }
++.sec-head .body { max-width: 35ch; }
++.grid { column-gap: 24px; }
++.item-media { border-radius: 3px; }
++.item-row { align-items: baseline; text-transform: none; letter-spacing: 0; gap: 12px; margin-top: 18px; }
++.item-row > span:first-child { font-family: var(--mark); font-size: 25px; line-height: 1.2; }
++.item-row > span:last-child { font-size: 10px; color: var(--muted); }
++.item-desc { font-size: 12px; line-height: 1.7; color: var(--muted); }
++.round { width: 44px; height: 44px; }
++.personal-copy > .title { max-width: 16ch; margin-bottom: 36px; }
++.steps h3, .atelier-list h3 { font-size: 14px; font-weight: 500; letter-spacing: -.01em; text-transform: none; }
++.steps p, .atelier-list p { font-size: 13px; line-height: 1.85; }
++.config #pName { font-size: 42px; }
++.config .body { font-size: 13px; line-height: 1.8; }
++.config legend, .specs summary { font-size: 11px; letter-spacing: .06em; }
++.config .opts label span { letter-spacing: .05em; }
++.price-row { align-items: center; gap: 12px; }
++.foot-row { font-size: 10px; line-height: 1.9; letter-spacing: .04em; }
++@media (max-width: 640px) {
++  body { font-size: 14px; }
++  .hero-foot h1 { font-size: 30px; max-width: 15ch; }
++  .hero-foot p { font-size: 10px; max-width: 32ch; }
++  .hero-foot .btn { min-height: 46px; }
++  .title { font-size: 33px; }
++  .story-card .title { font-size: 26px; }
++  .sec-head { margin-bottom: 32px; }
++  .sec-head .body { font-size: 13px; max-width: 34ch; }
++  .item-row > span:first-child { font-size: 28px; }
++  .item-row > span:last-child { font-size: 11px; }
++  .item-desc { font-size: 13px; }
++  .personal-copy > .title { margin-bottom: 26px; }
++}
+--- a/sursa/css/fonts.css
++++ b/sursa/css/fonts.css
+@@ -77,3 +77,6 @@
+   src: url(../fonts/instrument-latin.woff2) format('woff2');
+   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+ }
++
++/* Manrope: local variable font; licence in fonts/OFL-Manrope.txt. */
++@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 200 800; font-display: swap; src: url(../fonts/manrope-variable.woff2) format('woff2'); }
+--- a/sursa/data/catalog.js
++++ b/sursa/data/catalog.js
+@@ -5,9 +5,9 @@
+ export const MAX_QTY = 10;
+ 
+ export const BASES = [
+-  { id: 'galet', name: 'Galet', note: 'Bombat și moale.' },
++  { id: 'galet', name: 'Galet', note: 'Contur rotunjit, plintă retrasă.' },
+   { id: 'monolit', name: 'Monolit', note: 'Cilindru cu umăr rotunjit.' },
+-  { id: 'con', name: 'Con', note: 'Mai lat la bază, foarte stabil.' }
++  { id: 'con', name: 'Con', note: 'Linii drepte, bază mai lată.' }
+ ];
+ 
+ export const COLORS = [
+@@ -23,7 +23,7 @@
+ ];
+ 
+ export const SPECS = [
+-  ['Dimensiuni', 'Soclu Ø128 mm (Galet, Monolit) sau Ø133 mm (Con), înălțime totală 20,8 cm.'],
++  ['Dimensiuni', 'Soclu aprox. Ø129 mm (Galet), Ø128 mm (Monolit) sau Ø133 mm (Con); înălțime aprox. 20,8 cm.'],
+   ['Lumină', 'LED alb cald 5 V / 3 W, cu difuzor peste LED. Alimentare USB.'],
+   ['Abajur', 'Interschimbabil, se prinde în soclu cu o răsucire.']
+ ];
+@@ -32,9 +32,9 @@
+ // photo stays null until there is a real photograph of the workshop (see FOTOGRAFII.md); then
+ // photo: { src, srcset, width, height, alt } and the page shows it above the text.
+ export const ATELIER = [
+-  { n: '01', title: 'Printată strat cu strat', text: 'Abajurul se printează din PLA alb, în straturi de 0,16 mm. La litofanie, peretele are între 0,8 și 3 mm, iar grosimea lui desenează fotografia.', photo: null },
+-  { n: '02', title: 'Un soclu care stă bine', text: 'Soclul are greutate de oțel în bază și pare să plutească pe o linie de umbră. Cablul pleacă discret, prin spate.', photo: null },
+-  { n: '03', title: 'Abajur cu o răsucire', text: 'Abajurul se prinde în soclu cu o răsucire scurtă și se scoate la fel de ușor, pentru curățat.', photo: null }
++  { n: '01', title: 'Textura straturilor', text: 'Forma se construiește strat cu strat. Urmele fine de print fac parte din suprafața abajurului.', photo: null },
++  { n: '02', title: 'Detalii discrete', text: 'Plinta retrasă desenează o umbră sub soclu. Cablul iese discret, prin spate.', photo: null },
++  { n: '03', title: 'Forme de schimbat', text: 'Abajurul și soclul se separă printr-o răsucire scurtă. Îmbinarea este proiectată să permită schimbarea formei.', photo: null }
+ ];
+ 
+ const img = (night640, night1160, day640, day1160) => ({
+@@ -46,28 +46,28 @@
+ export const PRODUCTS = [
+   {
+     id: 'litofanie', name: 'Litofanie', shade: 'litho', price: null, personal: true,
+-    short: 'Fotografia ta, vizibilă doar când lampa e aprinsă.',
++    short: 'Fotografia ta, dezvăluită de lumină.',
+     long: 'Stinsă, abajurul pare un relief alb. Aprinsă, apare fotografia ta, cu umbre și detalii fine. Îți trimitem previzualizarea pe e-mail și printăm doar după ce o aprobi.',
+     photoAlt: 'Lampă Litofanie pe soclu Galet alb cu inel champagne',
+     defaults: { base: 'galet', color: 'alb', ring: 'champagne' }, images: img('img/litofanie-seara-640.webp', 'img/litofanie-seara-1160.webp', 'img/litofanie-zi-640.webp', 'img/litofanie-zi-1160.webp')
+   },
+   {
+     id: 'wave', name: 'Wave', shade: 'wave', price: null,
+-    short: 'Șase valuri fluide, rotite discret de jos până sus.',
++    short: 'Șase valuri moi, într-o singură formă.',
+     long: 'Șase valuri largi care se rotesc ușor pe înălțimea abajurului. Ziua prind lumina din cameră, seara o împart în benzi moi.',
+     photoAlt: 'Lampă Wave pe soclu Galet alb cu inel champagne',
+     defaults: { base: 'galet', color: 'alb', ring: 'champagne' }, images: img('img/wave-seara-640.webp', 'img/wave-seara-1160.webp', 'img/wave-zi-640.webp', 'img/wave-zi-1160.webp')
+   },
+   {
+     id: 'twist', name: 'Twist', shade: 'twist', price: null,
+-    short: 'Nervuri ascuțite într-o spirală de 180°.',
+-    long: 'Nervuri cu muchie fină, răsucite pe jumătate de tură de la bază până sus. Cea mai grafică formă din colecție.',
++    short: 'O spirală de 180°, cu muchii fine.',
++    long: 'Nervuri cu muchie fină, răsucite pe jumătate de tură de la bază până sus. Un ritm de lumină și umbră care se schimbă cu unghiul de privire.',
+     photoAlt: 'Lampă Twist pe soclu Monolit negru cu inel champagne',
+     defaults: { base: 'monolit', color: 'negru', ring: 'champagne' }, images: img('img/twist-seara-640.webp', 'img/twist-seara-1160.webp', 'img/twist-zi-640.webp', 'img/twist-zi-1160.webp')
+   },
+   {
+     id: 'ribbed', name: 'Ribbed', shade: 'ribbed', price: null,
+-    short: 'Siluetă de vază cu 36 de nervuri fine.',
++    short: '36 de nervuri, o siluetă de vază.',
+     long: 'Un profil de vază, îngust la bază și plin sus, cu 36 de nervuri fine care dau abajurului textură și când e stins.',
+     photoAlt: 'Lampă Ribbed pe soclu Monolit negru cu linie de lumină',
+     defaults: { base: 'monolit', color: 'negru', ring: 'lumina' }, images: img('img/ribbed-seara-640.webp', 'img/ribbed-seara-1160.webp', 'img/ribbed-zi-640.webp', 'img/ribbed-zi-1160.webp')
