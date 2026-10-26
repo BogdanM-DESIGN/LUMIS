@@ -133,7 +133,7 @@ export function createStudio(canvas, { reduceMotion = false } = {}) {
   const key = new THREE.DirectionalLight(0xfff1e0, 1.5); key.position.set(-3, 4, 4);
   const rim = new THREE.DirectionalLight(0xdfe6ff, 0.5); rim.position.set(3, 2, -3);
   // warm spill from the lamp onto the front of the base and the table, kept low so it does not mark the shade
-  const inner = new THREE.PointLight(0xffb36b, 0, 1.8, 2); inner.position.set(0, 0.06, 1.35);
+  const inner = new THREE.PointLight(0xffc68a, 0, 1.8, 2); inner.position.set(0, 0.06, 1.35);
   scene.add(hemi, key, rim, inner);
 
   const lamp = new THREE.Group();
@@ -141,7 +141,7 @@ export function createStudio(canvas, { reduceMotion = false } = {}) {
 
   const falloff = gradientTexture([[0, '#ffffff'], [0.55, '#f4e2c8'], [1, '#dcc5a4']]);
   const shadeLines = layerLines(300), baseLines = layerLines(1);
-  const shadeMat = glowShell(new THREE.MeshStandardMaterial({ color: 0xf1ece4, roughness: 0.55, side: THREE.DoubleSide, emissive: 0xffa95c, emissiveIntensity: 0,
+  const shadeMat = glowShell(new THREE.MeshStandardMaterial({ color: 0xf1ece4, roughness: 0.55, side: THREE.DoubleSide, emissive: 0xffc890, emissiveIntensity: 0,
     normalMap: shadeLines, normalScale: new THREE.Vector2(0.25, 0.25) }));
   const rimMat = new THREE.MeshStandardMaterial({ color: 0xf1ece4, roughness: 0.5 });
   const baseMat = new THREE.MeshStandardMaterial({ color: 0xe2dfd8, roughness: 0.62, envMapIntensity: 0.6, normalMap: baseLines, normalScale: new THREE.Vector2(0.3, 0.3) });

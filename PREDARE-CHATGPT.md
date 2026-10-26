@@ -33,7 +33,6 @@ Lucrezi pe repository-ul GitHub **BogdanM-DESIGN/LUMIS**. Sursa e în `LUMIS/`. 
 - **Coșul:** e salvat în localStorage, fără date personale. Butonul de comandă e **dezactivat intenționat**. Clientul poate copia selecția și o poate trimite.
 - **Linkuri directe:** fiecare configurație are link propriu, de exemplu `#lampa/ribbed/con/champagne/lumina`.
 - **Secțiunea Atelier:** doar text, cu sloturi pregătite pentru fotografii reale.
-- **Turul automat:** pornește numai la cerere.
 - **Accesibilitate:** dialoguri `<dialog>`, focus gestionat, suport pentru reduced-motion.
 - **Teste:** 19 teste unitare (`node --test tests/*.test.mjs`) și 10 verificări în browser (`node tests/browser-smoke.cjs`, necesită Playwright).
 
@@ -91,7 +90,7 @@ Din punct de vedere tehnic, comercial și legal în România. Sunt ciorne în `L
 - **Nu propune salvarea fotografiilor clienților** în localStorage, în export sau trimiterea lor către terți.
 - **Nu propune** analytics, servicii plătite sau chei API.
 - **Nu prezenta randările** drept fotografii ale produselor reale.
-- **Păstrează** numele și logoul LUMIS, deschiderea cu logoul mare peste cele patru lămpi, turul automat oprit implicit și exportul selecției.
+- **Păstrează** numele și logoul LUMIS, deschiderea cu logoul mare peste cele patru lămpi și exportul selecției. Turul automat a fost scos la cererea proprietarului; nu îl readuce.
 - **Spune clar ce ai verificat efectiv** (de exemplu, ai rulat codul sau ai deschis piesele) și ce doar presupui. Nu declara că ai testat pe telefoane reale dacă nu ai făcut-o.
 
 ## 6. Forma răspunsului

@@ -84,6 +84,39 @@ const check = (name, ok, detail = '') => { checks.push({ name, ok }); console.lo
   const pad = await page.evaluate(() => scrollY);
   check('mouse wheel eases to the exact distance, trackpad stays native', mid < 700 && Math.abs(end - 700) < 1 && Math.abs(pad - 720) < 1, `${mid} -> ${end}, +20 -> ${pad}`);
 
+  // typography: buttons, labels and menu use Manrope at small sizes; titles use Bodoni
+  const fonts = await page.evaluate(() => ['.btn', '.fine', '.cart', '.title'].map((s) => {
+    const cs = getComputedStyle(document.querySelector(s)); return [s, cs.fontFamily.split(',')[0].replace(/"/g, ''), parseFloat(cs.fontSize)];
+  }));
+  const fontsOk = fonts.slice(0, 3).every(([, f, px]) => f === 'Manrope' && px <= 14) && fonts[3][1] === 'Bodoni Moda';
+  check('typography: Manrope for controls, Bodoni for titles', fontsOk, fonts.map((f) => f.join(' ')).join(' | '));
+
+  // no top bar and no tour; "Vezi colecția" brings the collection title to the top; the cart stays in its corner
+  await page.goto(url, { waitUntil: 'networkidle' });
+  const bare = await page.evaluate(() => !document.getElementById('tour') && !document.querySelector('header, nav'));
+  await page.evaluate(() => document.querySelector('.hero [data-go="colectie"]').click());
+  await page.waitForTimeout(1600);
+  const land = await page.evaluate(() => {
+    const t = document.getElementById('h-col').getBoundingClientRect(), c = document.getElementById('cartBtn').getBoundingClientRect();
+    return { top: Math.round(t.top), cartRight: Math.round(innerWidth - c.right), cartTop: Math.round(c.top), fixed: getComputedStyle(document.getElementById('cartBtn')).position };
+  });
+  check('no bar or tour; links land at the top; cart stays in the corner', bare && land.top > 0 && land.top < 260 && land.fixed === 'fixed' && land.cartRight < 40 && land.cartTop < 40, JSON.stringify(land));
+
+  // the customer's photo is gone after the sheet closes and does not come back on reopening
+  await page.evaluate(() => document.querySelector('[data-open="litofanie"]').click());
+  await page.waitForFunction(() => document.getElementById('studioLoading').hidden, null, { timeout: 15000 });
+  const sample = require('fs').readFileSync(require('path').join(__dirname, '..', 'img', 'litofanie-mostra.webp'));
+  await page.setInputFiles('#photoInput', { name: 'test.png', mimeType: 'image/webp', buffer: sample });
+  await page.waitForFunction(() => !document.getElementById('photoClear').hidden, null, { timeout: 5000 });
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(300);
+  await page.evaluate(() => document.querySelector('[data-open="litofanie"]').click());
+  await page.waitForFunction(() => document.getElementById('studioLoading').hidden, null, { timeout: 15000 });
+  const after = await page.evaluate(() => ({ clear: document.getElementById('photoClear').hidden, place: document.getElementById('placeField').hidden,
+    label: document.getElementById('photoLabel').textContent, stored: JSON.stringify(localStorage).includes('test.png') }));
+  await page.keyboard.press('Escape');
+  check('the photo is cleared when the sheet closes', after.clear && after.place && after.label === 'Încarcă o fotografie' && !after.stored, JSON.stringify(after));
+
   // direct links: a link opens the configured lamp, choices update it, closing removes it
   await page.goto(url + '#lampa/twist/con/grafit/lumina', { waitUntil: 'networkidle' });
   await page.waitForFunction(() => document.getElementById('productDlg').open && document.getElementById('studioLoading').hidden, null, { timeout: 15000 });

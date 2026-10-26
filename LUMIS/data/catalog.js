@@ -5,9 +5,9 @@ export const CURRENCY = 'lei';
 export const MAX_QTY = 10;
 
 export const BASES = [
-  { id: 'galet', name: 'Galet', note: 'Contur rotunjit, plintă retrasă.' },
-  { id: 'monolit', name: 'Monolit', note: 'Cilindru cu umăr rotunjit.' },
-  { id: 'con', name: 'Con', note: 'Linii drepte, bază mai lată.' }
+  { id: 'galet', name: 'Galet', note: 'Bombat, ca o piatră de râu. Cel mai moale contur.' },
+  { id: 'monolit', name: 'Monolit', note: 'Cilindru drept, cu muchii rotunjite.' },
+  { id: 'con', name: 'Con', note: 'Mai lat jos, cu flancuri drepte.' }
 ];
 
 export const COLORS = [
@@ -23,18 +23,20 @@ export const RINGS = [
 ];
 
 export const SPECS = [
-  ['Dimensiuni', 'Soclu aprox. Ø129 mm (Galet), Ø128 mm (Monolit) sau Ø133 mm (Con); înălțime aprox. 20,8 cm.'],
-  ['Lumină', 'LED alb cald 5 V / 3 W, cu difuzor peste LED. Alimentare USB.'],
-  ['Abajur', 'Interschimbabil, se prinde în soclu cu o răsucire.']
+  ['Dimensiuni', 'Înălțime aprox. 20,8 cm. Soclu aprox. Ø129 mm (Galet), Ø128 mm (Monolit) sau Ø133 mm (Con).'],
+  ['Lumină', 'Bandă LED alb cald de 5 V, aproximativ 3 W, ascunsă sub un difuzor. Se alimentează prin cablu USB, de la un încărcător de 5 V.'],
+  ['Abajur', 'Se prinde în soclu cu o răsucire scurtă și se scoate la fel, pentru curățat sau pentru altă formă.'],
+  ['Material', 'PLA printat 3D. De aproape se văd liniile fine ale straturilor; fac parte din textura lămpii.'],
+  ['Utilizare', 'Lampă decorativă, pentru interior. Ține-o departe de surse de căldură și de apă: PLA-ul se înmoaie la temperaturi ridicate.']
 ];
 
 // Atelier: how a lamp is made. Only facts from lampa/spec.json and lampa/GHID-PRINT.md.
 // photo stays null until there is a real photograph of the workshop (see FOTOGRAFII.md); then
 // photo: { src, srcset, width, height, alt } and the page shows it above the text.
 export const ATELIER = [
-  { n: '01', title: 'Textura straturilor', text: 'Forma se construiește strat cu strat. Urmele fine de print fac parte din suprafața abajurului.', photo: null },
-  { n: '02', title: 'Detalii discrete', text: 'Plinta retrasă desenează o umbră sub soclu. Cablul iese discret, prin spate.', photo: null },
-  { n: '03', title: 'Forme de schimbat', text: 'Abajurul și soclul se separă printr-o răsucire scurtă. Îmbinarea este proiectată să permită schimbarea formei.', photo: null }
+  { title: 'Textura straturilor', text: 'Forma se construiește strat cu strat. Urmele fine de print fac parte din suprafața abajurului.', photo: null },
+  { title: 'Detalii discrete', text: 'Plinta retrasă desenează o umbră sub soclu. Cablul iese discret, prin spate.', photo: null },
+  { title: 'Forme de schimbat', text: 'Abajurul și soclul se separă printr-o răsucire scurtă. Îmbinarea este proiectată să permită schimbarea formei.', photo: null }
 ];
 
 const img = (night640, night1160, day640, day1160) => ({
@@ -46,29 +48,41 @@ const img = (night640, night1160, day640, day1160) => ({
 export const PRODUCTS = [
   {
     id: 'litofanie', name: 'Litofanie', shade: 'litho', price: null, personal: true,
-    short: 'Fotografia ta, dezvăluită de lumină.',
-    long: 'Stinsă, abajurul pare un relief alb. Aprinsă, apare fotografia ta, cu umbre și detalii fine. Îți trimitem previzualizarea pe e-mail și printăm doar după ce o aprobi.',
+    short: 'Fotografia ta, ascunsă în relief, apare când aprinzi lampa.',
+    long: 'Ziua pare o lampă albă, cu un relief fin pe care abia îl observi. Seara, când o aprinzi, relieful devine fotografia ta. Abajurul are pereți între 0,8 și 3 mm: lumina trece ușor prin zonele subțiri și greu prin cele groase, așa că apar luminile, umbrele și detaliile imaginii. O amintire care stă discret pe noptieră și se arată când vrei tu.',
+    off: 'Un abajur alb, cu un relief fin în care fotografia abia se ghicește.',
+    on: 'Fotografia apare în lumină caldă, cu umbrele și detaliile ei.',
+    use: 'Pentru un loc drag, o casă, un chip sau o zi pe care vrei s-o păstrezi aproape.',
     photoAlt: 'Lampă Litofanie pe soclu Galet alb cu inel champagne',
     defaults: { base: 'galet', color: 'alb', ring: 'champagne' }, images: img('img/litofanie-seara-640.webp', 'img/litofanie-seara-1160.webp', 'img/litofanie-zi-640.webp', 'img/litofanie-zi-1160.webp')
   },
   {
     id: 'wave', name: 'Wave', shade: 'wave', price: null,
-    short: 'Șase valuri moi, într-o singură formă.',
-    long: 'Șase valuri largi care se rotesc ușor pe înălțimea abajurului. Ziua prind lumina din cameră, seara o împart în benzi moi.',
+    short: 'Șase valuri largi, rotite ușor pe înălțime.',
+    long: 'Cel mai moale contur din colecție. Cele șase valuri se rotesc cu 140° de jos până sus, așa că silueta se schimbă când treci pe lângă lampă.',
+    off: 'Valurile prind lumina din cameră și desenează umbre largi.',
+    on: 'Crestele și adânciturile apar în tonuri diferite de lumină.',
+    use: 'Pe noptieră sau pe o comodă, unde vrei o formă liniștită.',
     photoAlt: 'Lampă Wave pe soclu Galet alb cu inel champagne',
     defaults: { base: 'galet', color: 'alb', ring: 'champagne' }, images: img('img/wave-seara-640.webp', 'img/wave-seara-1160.webp', 'img/wave-zi-640.webp', 'img/wave-zi-1160.webp')
   },
   {
     id: 'twist', name: 'Twist', shade: 'twist', price: null,
-    short: 'O spirală de 180°, cu muchii fine.',
-    long: 'Nervuri cu muchie fină, răsucite pe jumătate de tură de la bază până sus. Un ritm de lumină și umbră care se schimbă cu unghiul de privire.',
-    photoAlt: 'Lampă Twist pe soclu Monolit negru cu inel champagne',
+    short: '14 nervuri ascuțite, într-o spirală de 180°.',
+    long: 'Cea mai grafică formă din colecție: 14 nervuri cu muchie fină, răsucite pe jumătate de tură de la soclu până sus.',
+    off: 'Muchiile trasează diagonale fine de lumină și umbră.',
+    on: 'Spirala rămâne vizibilă ca un șir de benzi luminoase.',
+    use: 'Pe un birou sau pe un raft, lângă obiecte cu linii drepte.',
+    photoAlt: 'Lampă Twist pe soclu Monolit negru cu linie de lumină',
     defaults: { base: 'monolit', color: 'negru', ring: 'lumina' }, images: img('img/twist-seara-640.webp', 'img/twist-seara-1160.webp', 'img/twist-zi-640.webp', 'img/twist-zi-1160.webp')
   },
   {
     id: 'ribbed', name: 'Ribbed', shade: 'ribbed', price: null,
-    short: '36 de nervuri, o siluetă de vază.',
-    long: 'Un profil de vază, îngust la bază și plin sus, cu 36 de nervuri fine care dau abajurului textură și când e stins.',
+    short: '36 de nervuri fine, pe o siluetă de vază.',
+    long: 'Un profil de vază: se strânge puțin deasupra soclului și se lărgește spre partea de sus. Cele 36 de nervuri verticale dau textură și când lampa e stinsă.',
+    off: 'Nervurile fac o textură regulată, ca o țesătură.',
+    on: 'Lumina se așază în dungi verticale, mai calme decât la Twist.',
+    use: 'Într-un living sau pe o consolă, unde vrei un obiect de privit.',
     photoAlt: 'Lampă Ribbed pe soclu Monolit negru cu linie de lumină',
     defaults: { base: 'monolit', color: 'negru', ring: 'lumina' }, images: img('img/ribbed-seara-640.webp', 'img/ribbed-seara-1160.webp', 'img/ribbed-zi-640.webp', 'img/ribbed-zi-1160.webp')
   }

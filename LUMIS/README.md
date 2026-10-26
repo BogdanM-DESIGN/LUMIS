@@ -9,7 +9,7 @@ index.html            pagina
 css/fonts.css         Bodoni Moda (marca și titlurile) + Manrope (textul), servite local (OFL 1.1)
 css/site.css          tot stilul, cu variabile la început
 data/catalog.js       singurul loc pentru produse, socluri, culori, inele, prețuri, imagini și textele din Atelier
-js/main.js            pagina: camera zi/seară, tur, colecție, foaia de produs, coș
+js/main.js            pagina: camera zi/seară, colecție, foaia de produs, coș, derularea cu rotița
 js/cart.js            logica coșului (funcții pure + localStorage defensiv)
 js/links.js           linkurile directe către o lampă (#lampa/ribbed/con/champagne/lumina)
 js/studio.js          previzualizarea 3D (Three.js), încărcată doar la deschiderea unei lămpi

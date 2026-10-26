@@ -5,7 +5,7 @@ Document version: 1.0, 2026-10-26. Initial factual context, not completed custom
 Decorative lamps with printed shades: Wave, Twist, Ribbed and a personalised lithophane concept. The current website includes a 3D configurator, base/colour/ring choices, local photo simulation and a selection cart. Manufacturing validation is still at prototype stage. Read current CAD/spec before quoting dimensions.
 
 ## Brand and preferences
-Romanian voice, readable and restrained; Bodoni headings/wordmark, Manrope body. Retain the four-lamp opening and existing registered room sequence. Smooth scrolling and optional automatic tour, off initially and interruptible.
+Romanian voice, readable and restrained; Bodoni headings/wordmark, Manrope body. Retain the four-lamp opening and existing registered room sequence. Smooth scrolling; no automatic tour (removed at the owner's request, 2026-10-26).
 
 ## Evidence and constraints
 Generated visuals are renders/illustrations, not photographs of a manufactured lamp. No final selling price, tested throughput, validated lead time, certification, thermal result or customer-interview dataset has been provided here. No fake checkout, invented reviews, stock or promises. Customer photos remain local in memory; no photo persistence, upload, tracking or paid integrations are authorised by installing skills.

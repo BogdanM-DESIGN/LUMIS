@@ -42,10 +42,11 @@ function attachDrop(seg, getActive) {
 /* ---------- smooth anchor jumps (native wheel and trackpad scrolling stay untouched) ---------- */
 function goTo(id) {
   const t = document.getElementById(id);
-  const y = id === 'top' || !t ? 0 : t.getBoundingClientRect().top + window.scrollY - 24;
+  const below = 32;
+  const y = id === 'top' || !t ? 0 : t.getBoundingClientRect().top + window.scrollY - below;
   window.scrollTo({ top: y, behavior: reduce() ? 'auto' : 'smooth' });
 }
-$$('[data-go]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); stopTour(); goTo(a.dataset.go); }));
+$$('[data-go]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); goTo(a.dataset.go); }));
 
 /* ---------- the room: daylight fades with the scroll, then the lamp switches on ---------- */
 const story = $('#poveste');
@@ -66,35 +67,6 @@ const queueStory = () => { if (!storyQueued) { storyQueued = true; requestAnimat
 addEventListener('scroll', queueStory, { passive: true });
 addEventListener('resize', queueStory);
 paintStory();
-
-/* ---------- optional automatic tour: starts only on request, stops on any interaction ---------- */
-const tourBtn = $('#tour');
-let tourRaf = 0, tourLast = 0, tourY = 0;
-function tourStep(t) {
-  const dt = Math.min(64, t - (tourLast || t));
-  tourLast = t;
-  const max = document.documentElement.scrollHeight - innerHeight;
-  const speed = innerHeight / 3.2; // px per second: a screen every ~3 seconds
-  tourY = Math.min(max, tourY + (speed * dt) / 1000);
-  window.scrollTo(0, tourY);
-  if (tourY >= max - 1) { stopTour(); return; }
-  tourRaf = requestAnimationFrame(tourStep);
-}
-function startTour() {
-  if (reduce()) { goTo('colectie'); return; }
-  tourY = window.scrollY; tourLast = 0;
-  tourBtn.setAttribute('aria-pressed', 'true');
-  tourRaf = requestAnimationFrame(tourStep);
-}
-function stopTour() {
-  if (!tourRaf) return;
-  cancelAnimationFrame(tourRaf); tourRaf = 0;
-  tourBtn.setAttribute('aria-pressed', 'false');
-}
-tourBtn.addEventListener('click', () => (tourRaf ? stopTour() : startTour()));
-['wheel', 'touchstart', 'keydown'].forEach((ev) => addEventListener(ev, () => stopTour(), { passive: true }));
-addEventListener('pointerdown', (e) => { if (!tourBtn.contains(e.target)) stopTour(); });
-document.addEventListener('visibilitychange', () => { if (document.hidden) stopTour(); });
 
 /* ---------- mouse wheel: a short inertial finish ---------- */
 // Only for notched mouse wheels. Trackpads already have native momentum (small pixel deltas), and touch,
@@ -127,7 +99,7 @@ addEventListener('wheel', (e) => {
 /* ---------- atelier: text now, real photos when they exist ---------- */
 $('#atelierList').innerHTML = ATELIER.map((a) => `<li>
   ${a.photo ? `<img src="${a.photo.src}" srcset="${a.photo.srcset}" sizes="(max-width: 640px) 92vw, 30vw" width="${a.photo.width}" height="${a.photo.height}" loading="lazy" decoding="async" alt="${esc(a.photo.alt)}">` : ''}
-  <span class="n">${a.n}</span><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></li>`).join('');
+  <h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></li>`).join('');
 
 /* ---------- collection, rendered from the catalogue ---------- */
 const grid = $('#grid');
@@ -165,7 +137,7 @@ range.addEventListener('input', () => compare.style.setProperty('--pos', `${rang
 /* ---------- dialogs: remember who opened them, give focus back on close ---------- */
 const openers = new WeakMap();
 function openDialog(dlg, opener) {
-  stopTour(); wheelCancel();
+  wheelCancel();
   openers.set(dlg, opener || document.activeElement);
   dlg.showModal();
 }
@@ -324,6 +296,8 @@ async function openProduct(id, opener, config = null) {
   $('#pName').textContent = p.name;
   $('#pPrice').textContent = priceText(p.price);
   $('#pLong').textContent = p.long;
+  $('#pTraits').innerHTML = [['Stinsă', p.off], ['Aprinsă', p.on], ['Se potrivește', p.use]]
+    .filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
   $('#photoNight').src = p.images.night.src; $('#photoNight').alt = `Randare de ambient: ${p.photoAlt}, seara`;
   $('#photoDay').src = p.images.day.src; $('#photoDay').alt = `Randare de ambient: ${p.photoAlt}, ziua`;
   $('#studioLoading').hidden = false;
@@ -490,3 +464,17 @@ function addToCart(item, qty, from) {
 
 renderCart();
 openFromHash();
+
+/* ---------- the collection's lamps settle in as they reach the view; nothing moves with reduced motion ---------- */
+if ('IntersectionObserver' in window && !reduce()) {
+  const items = $$('.grid .item'); // one authored entrance: the lamps of the collection
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+  }), { rootMargin: '0px 0px -8% 0px' });
+  items.forEach((el, i) => {
+    if (el.getBoundingClientRect().top < innerHeight) return; // already on screen: leave it as it is
+    el.classList.add('rise');
+    el.style.setProperty('--d', `${[...el.parentElement.children].indexOf(el) * 90}ms`);
+    io.observe(el);
+  });
+}

@@ -14,21 +14,10 @@
 <body>
 <a class="skip" href="#colectie">Sari la colecție</a>
 
-<header class="nav glass" id="nav">
-  <a href="#top" class="logo" data-go="top" aria-label="LUMIS, începutul paginii">LUMIS</a>
-  <nav class="nav-links" aria-label="Navigare principală">
-    <a href="#colectie" data-go="colectie">Colecția</a>
-    <a href="#personalizare" data-go="personalizare">Personalizare</a>
-    <a href="#atelier" data-go="atelier">Atelier</a>
-  </nav>
-  <div class="nav-tools">
-    <button class="tour" type="button" id="tour" aria-pressed="false" title="Parcurge pagina automat. Se oprește la orice atingere.">
-      <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M7 4l13 8-13 8z" fill="currentColor"/><path class="i-stop" d="M6 6h12v12H6z" fill="currentColor"/></svg>
-      <span>Tur</span>
-    </button>
-    <button class="cart" type="button" id="cartBtn" aria-haspopup="dialog" aria-controls="cartDlg"><span class="cart-label">Coș</span><span class="cart-count" id="cartCount">0</span></button>
-  </div>
-</header>
+<button class="cart" type="button" id="cartBtn" aria-haspopup="dialog" aria-controls="cartDlg">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+  <span class="cart-label">Coș</span><span class="cart-count" id="cartCount">0</span>
+</button>
 
 <main id="top">
   <section class="hero" aria-labelledby="h-hero">
@@ -49,7 +38,6 @@
   </section>
 
   <div class="intro wrap">
-    <p class="cap muted">Lumis acasă</p>
     <h2 class="title">Ziua, forma. Seara, atmosfera.</h2>
   </div>
 
@@ -61,8 +49,8 @@
         <img class="s-dusk" src="img/camera-seara-stinsa-1920.webp" srcset="img/camera-seara-stinsa-960.webp 960w, img/camera-seara-stinsa-1920.webp 1920w" sizes="(max-width: 700px) 200vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="">
         <img class="s-on" src="img/camera-seara-aprinsa-1920.webp" srcset="img/camera-seara-aprinsa-960.webp 960w, img/camera-seara-aprinsa-1920.webp 1920w" sizes="(max-width: 700px) 200vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="">
         <div class="story-card glass" aria-live="polite">
-          <div class="st st-off"><p class="cap muted">Ziua</p><p class="title">Un obiect de design, chiar și stinsă</p></div>
-          <div class="st st-on"><p class="cap muted">Seara</p><p class="title">Aprinsă, luminează camera</p></div>
+          <div class="st st-off"><p class="title">Un obiect de design, chiar și stinsă</p></div>
+          <div class="st st-on"><p class="title">Aprinsă, luminează camera</p></div>
         </div>
       </div>
     </div>
@@ -71,7 +59,7 @@
   <section class="collection wrap" id="colectie" aria-labelledby="h-col">
     <div class="sec-head">
       <h2 class="title" id="h-col">O formă care ți se potrivește.</h2>
-      <p class="body">Patru abajururi. Alege soclul, culoarea și inelul; vezi combinația în 3D.</p>
+      <p class="body">Patru abajururi, fiecare cu altă textură, pe trei socluri. Deschide o lampă ca să alegi soclul, culoarea și inelul și să vezi combinația în 3D.</p>
     </div>
     <ul class="grid" id="grid"></ul>
   </section>
@@ -85,8 +73,8 @@
       <div class="compare-line" aria-hidden="true"><span class="knob glass"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
     </div>
     <div class="personal-copy">
-      <p class="cap muted">Litofanie personalizată</p>
       <h2 class="title" id="h-per">Dintr-o fotografie. Ceva de păstrat.</h2>
+      <p class="body">Alegi o fotografie cu un loc drag, o casă sau un chip. O transformăm într-un abajur cu pereți de grosimi diferite: ziua pare un relief alb, iar seara, aprins, îți arată imaginea în lumină caldă.</p>
       <ol class="steps">
         <li><span class="n">01</span><div><h3>Alegi fotografia și finisajele</h3><p>Încarcă o fotografie clară pentru simularea din browser. Apoi alege soclul, culoarea și inelul.</p></div></li>
         <li><span class="n">02</span><div><h3>Verifici înainte de printare</h3><p>Fotografia se pregătește pentru litofanie. Previzualizarea finală se aprobă pe e-mail înainte de printare.</p></div></li>
@@ -140,10 +128,10 @@
       </div>
     </div>
     <form class="config" id="config" novalidate>
-      <p class="cap muted">Lampă</p>
       <h2 class="title" id="pName">Litofanie</h2>
       <div class="price-row"><p class="price" id="pPrice">Preț la lansare</p><button class="link" type="button" id="copyLink">Copiază linkul</button></div>
       <p class="body" id="pLong"></p>
+      <dl class="traits" id="pTraits"></dl>
       <fieldset><legend>Soclu · <span class="val" id="vBase"></span></legend><div class="seg opts" id="optBase"></div></fieldset>
       <fieldset><legend>Culoarea soclului · <span class="val" id="vColor"></span></legend><div class="swatches" id="optColor"></div></fieldset>
       <fieldset><legend>Inel · <span class="val" id="vRing"></span></legend><div class="seg opts" id="optRing"></div></fieldset>
@@ -165,7 +153,7 @@
         </div>
         <button class="btn btn-ink add" type="submit" id="addBtn">Adaugă în coș</button>
       </div>
-      <p class="fine" id="personalNote">Pentru litofanie, fotografia o trimiți separat, după ce confirmăm comanda.</p>
+      <p class="fine" id="personalNote">Fotografia de aici rămâne doar în browserul tău. Pe cea finală o trimiți separat, după ce confirmăm comanda; îți trimitem previzualizarea pe e-mail și printăm doar după ce o aprobi.</p>
       <div class="specs" id="specs"></div>
     </form>
   </div>
