@@ -1,67 +1,45 @@
-# LUMIS — site, imagini și predare pentru Claude
+# LUMIS
 
-## Propunere nouă: design, imagini și audit pentru Claude
+Lămpi decorative printate 3D: site de prezentare cu configurator și fișierele pentru lampa reală, din aceeași sursă.
 
-Varianta nouă este pe branch-ul **`codex/lumis-audit-design-2026-10-26`**, pentru review și integrare de către Claude:
+**Stadiu: prelansare.** Nu există prețuri, firmă, plată sau fotografii ale produselor fabricate. Toate imaginile sunt randări digitale, iar site-ul spune asta. Nicio piesă nu a fost încă printată.
 
-- **[Deschide propunerea completă](https://github.com/BogdanM-DESIGN/LUMIS/tree/codex/lumis-audit-design-2026-10-26/propuneri/chatgpt-2026-10-26)**
-- **[Raportul critic, corecții și cote candidate](https://github.com/BogdanM-DESIGN/LUMIS/blob/codex/lumis-audit-design-2026-10-26/propuneri/chatgpt-2026-10-26/RAPORT-PENTRU-CLAUDE.md)**
-- **[Descarcă site-ul și auditul — aproximativ 10 MB](https://github.com/BogdanM-DESIGN/LUMIS/blob/codex/lumis-audit-design-2026-10-26/livrare/LUMIS-propunere-ChatGPT-site-si-audit.zip?raw=true)**
-- **[Descarcă cele 10 imagini noi PNG — aproximativ 16 MB](https://github.com/BogdanM-DESIGN/LUMIS/blob/codex/lumis-audit-design-2026-10-26/livrare/LUMIS-propunere-ChatGPT-imagini-master.zip?raw=true)**
+## Ce e aici
 
-Include tipografie Manrope, texte revizuite, imagini mai detaliate, capturi înainte/după și corecțiile configuratorului. Păstrează completările recente de pe `claude/lumis-v2`. Sursele propuse și cotele de test sunt separate; versiunea publicată și STL-urile originale nu au fost înlocuite automat.
+| Cale | Ce conține |
+|---|---|
+| [`LUMIS/`](LUMIS/) | **sursa principală**: site-ul, generatorul de piese, fișierele de print, testele și documentația. Începe cu [`LUMIS/README.md`](LUMIS/README.md). |
+| [`LUMIS/lampa/`](LUMIS/lampa/) | lampa reală: `spec.json` (dimensiunile), generatorul, fișierele 3MF gata de print și [ghidul de print și asamblare](LUMIS/lampa/GHID-PRINT.md) |
+| [`LUMIS/VERIFICARE.md`](LUMIS/VERIFICARE.md) | ce a fost verificat și ce nu |
+| [`LUMIS/docs/`](LUMIS/docs/) | lista de fotografii reale de făcut, ciornele juridice (de verificat de un avocat) și randările soclurilor |
+| `LUMIS-deschide.html` | tot site-ul într-un singur fișier, pentru prezentare: se deschide cu dublu-clic într-un browser |
+| [`PREDARE-CHATGPT.md`](PREDARE-CHATGPT.md) | context și reguli pentru analiza făcută de ChatGPT |
+| [`PROMPT-PENTRU-CLAUDE.md`](PROMPT-PENTRU-CLAUDE.md) | brieful de rafinare a site-ului |
+| `imagini-noi-master/`, `original/` | imaginile master și pachetul inițial, păstrate pentru referință |
 
-## Actualizarea Claude din 26 octombrie 2026
+## Istoric și propuneri
 
-**Cel mai nou pachet primit** este păstrat separat, fără modificarea conținutului furnizat de Claude:
+- **Auditul și propunerea ChatGPT/Codex din 26 octombrie 2026** (ramura [`codex/lumis-audit-design-2026-10-26`](https://github.com/BogdanM-DESIGN/LUMIS/tree/codex/lumis-audit-design-2026-10-26/propuneri/chatgpt-2026-10-26)): corecțiile tehnice, designul cu Manrope, textele, imaginile noi și testele de regresie sunt integrate în `LUMIS/`, după verificare. Ce s-a preluat și ce s-a ajustat e descris în PR.
+- `actualizari/claude-2026-10-26/` și `livrare/`: copia pachetului trimis pentru analiza ChatGPT, păstrată pentru istoric. Sursa curentă e `LUMIS/`.
+- `original/` și `imagini-noi-master/`: pachetul inițial și imaginile lui master.
 
-- **[Descarcă pachetul nou integral — aproximativ 28 MB](livrare/LUMIS-pentru-ChatGPT-2026-10-26.zip?raw=true)**
-- **[Sursele noi ale site-ului și generatorului de piese](actualizari/claude-2026-10-26/sursa/)**
-- **[Cele 11 piese STL](actualizari/claude-2026-10-26/modele-stl/)**
-- **[Exportul HTML autonom nou](actualizari/claude-2026-10-26/LUMIS-deschide.html?raw=true)**
-- **[Promptul de analiză trimis de Claude](actualizari/claude-2026-10-26/PROMPT-ChatGPT.md)**
-- **[Capturile noi](actualizari/claude-2026-10-26/capturi/)** și **[randările pieselor](actualizari/claude-2026-10-26/randari/)**
+## Rulare și teste
 
-Acest pachet include remedierea pe telefon descrisă de Claude pentru controalele Aprinsă/Stinsă. Analiza independentă a acestei versiuni este în curs; încărcarea nu constituie validarea fabricației, siguranței sau a afirmațiilor din rapoartele primite. Nu folosi exportul HTML anterior pentru a verifica această remediere.
+```
+cd LUMIS
+python3 -m http.server 8080          # site-ul, la http://localhost:8080
+node --test tests/*.test.mjs         # 19 teste: coș, linkuri, potrivirea formelor site / piese
+node tests/browser-smoke.cjs         # 11 verificări în Chromium (necesită Playwright)
+python tests/audit-regressions.py URL # 6 regresii în browser (Playwright pentru Python)
+python lampa/generate.py             # regenerează piesele (necesită trimesh, manifold3d, shapely)
+python lampa/overhang.py             # pante de print și pereți
+python lampa/fit.py                  # lampa asamblată în calculator, cu LED, cablu și șuruburi
+```
 
-Secțiunile de mai jos documentează **predarea anterioară**, păstrată pentru istoric. Claude rămâne programatorul și designerul principal; ChatGPT face analiza independentă și propune corecții pentru verificarea lui Claude.
+## Cum lucrăm
 
-Acesta este pachetul complet al versiunii realizate: cod, imagini noi, configurator 3D, documentație, capturi și promptul pentru analiză.
+- **Claude:** programare, design, piesele lămpii.
+- **ChatGPT:** cerințe, analiză și verificarea rezultatelor.
+- **Proprietarul:** decizii, print de test și aprobarea finală.
 
-## Descarcă pentru Claude
-
-Descarcă **ambele arhive** și atașează-le în aceeași conversație Claude:
-
-1. **[Cod, site și documentație — aproximativ 25 MB](livrare/LUMIS-Claude-1-code-et-documentation.zip?raw=true)**
-2. **[Imagini noi PNG master — aproximativ 18 MB](livrare/LUMIS-Claude-2-imagini-master.zip?raw=true)**
-
-Dacă GitHub afișează pagina fișierului, apasă **Download raw file** / pictograma de descărcare. Cele două arhive sunt separate pentru a evita un singur atașament de aproximativ 43 MB.
-
-Apoi copiază textul din **[PROMPT-PENTRU-CLAUDE.md](PROMPT-PENTRU-CLAUDE.md)** în conversația Claude.
-
-Alternativ, **Code → Download ZIP** descarcă întregul repository, inclusiv sursele și arhivele de livrare.
-
-## Vezi site-ul pe calculator
-
-Descarcă și extrage prima arhivă, apoi deschide **LUMIS-deschide.html** într-un browser actualizat. Acesta este un export autonom cu cod, imagini și fonturi încorporate. Unele previzualizatoare de atașamente nu execută JavaScript: deschide fișierul descărcat în browser.
-
-Pentru dezvoltare și publicare, folosește sursele modulare din **[LUMIS/](LUMIS/)** și instrucțiunile din **[README-ul proiectului](LUMIS/README.md)**. Pagina HTML din interfața GitHub este o vizualizare de cod; nu este o versiune publicată a site-ului.
-
-## Ce include
-
-- Prezentarea LUMIS peste cele patru lămpi, cu imagine separată pentru telefon.
-- Camera cu tranziție zi → seară → aprinderea lămpii.
-- Configurator 3D rotativ, trei socluri, patru culori și două inele.
-- Simularea locală a fotografiei pentru litofanie, galerie și coș persistent.
-- Derulare fluidă și tur automat opțional, cu oprire la interacțiune.
-- Imagini WebP responsive, fonturi locale și documentație de publicare.
-- **11 PNG-uri master noi:** zece folosite în site și o panoramă alternativă.
-- Arhiva originală nemodificată, capturi și rapoarte de testare.
-
-Imaginile sunt randări generate digital, nu fotografii ale unor produse fabricate. Modelele web sunt aproximări parametrice, nu fișiere CAD de fabricație.
-
-## Verificări și stadiu
-
-Vezi **[VERIFICARE.md](LUMIS/VERIFICARE.md)** și **[rapoartele](LUMIS-verificare/)** pentru verificările efectuate: opt teste unitare și fluxuri browser pentru configurator, coș, fotografie, tur, cameră, dimensiuni mobile și fallback fără WebGL.
-
-Comenzile și plățile nu sunt active. Prețurile, datele firmei, condițiile comerciale și textele juridice trebuie completate înainte de vânzare. Încărcarea acestui repository nu publică automat un site prin GitHub Pages.
+Fiecare etapă vine ca **pull request draft**, pe care proprietarul îl verifică înainte de unirea în `main`. Observațiile se scriu ca comentarii la PR sau ca issue.
