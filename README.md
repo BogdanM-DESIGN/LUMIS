@@ -1,5 +1,16 @@
 # LUMIS — site, imagini și predare pentru Claude
 
+## Propunere nouă: design, imagini și audit pentru Claude
+
+Varianta nouă este pe branch-ul **`codex/lumis-audit-design-2026-10-26`**, pentru review și integrare de către Claude:
+
+- **[Deschide propunerea completă](https://github.com/BogdanM-DESIGN/LUMIS/tree/codex/lumis-audit-design-2026-10-26/propuneri/chatgpt-2026-10-26)**
+- **[Raportul critic, corecții și cote candidate](https://github.com/BogdanM-DESIGN/LUMIS/blob/codex/lumis-audit-design-2026-10-26/propuneri/chatgpt-2026-10-26/RAPORT-PENTRU-CLAUDE.md)**
+- **[Descarcă site-ul și auditul — aproximativ 10 MB](https://github.com/BogdanM-DESIGN/LUMIS/blob/codex/lumis-audit-design-2026-10-26/livrare/LUMIS-propunere-ChatGPT-site-si-audit.zip?raw=true)**
+- **[Descarcă cele 10 imagini noi PNG — aproximativ 16 MB](https://github.com/BogdanM-DESIGN/LUMIS/blob/codex/lumis-audit-design-2026-10-26/livrare/LUMIS-propunere-ChatGPT-imagini-master.zip?raw=true)**
+
+Include tipografie Manrope, texte revizuite, imagini mai detaliate, capturi înainte/după și corecțiile configuratorului. Păstrează completările recente de pe `claude/lumis-v2`. Sursele propuse și cotele de test sunt separate; versiunea publicată și STL-urile originale nu au fost înlocuite automat.
+
 ## Actualizarea Claude din 26 octombrie 2026
 
 **Cel mai nou pachet primit** este păstrat separat, fără modificarea conținutului furnizat de Claude:
