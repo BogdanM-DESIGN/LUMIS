@@ -1,6 +1,6 @@
 # LUMIS: ghid de fabricație
 
-Toate piesele se generează din `spec.json` cu `python lampa/generate.py`. Site-ul citește aceleași dimensiuni, deci lampa printată are exact forma din configurator.
+Toate piesele se generează din `spec.json` cu `python lampa/generate.py`. Site-ul citește aceiași parametri pentru forma exterioară. Rezultatul printat depinde de filament, slicer și calibrarea imprimantei; previzualizarea nu validează toleranțele sau funcționarea.
 
 > **Important:** piesele au fost verificate în calculator (sunt solide închise, nu se intersectează și știfturile cad în canale), dar **nu au fost printate încă**. Toleranțele de îmbinare trebuie confirmate cu un print de test (pasul 1 de mai jos).
 
@@ -26,9 +26,9 @@ Masa de PLA din `print/dimensiuni.txt` e calculată pentru piesă plină. Cu set
 - Bandă LED 5 V USB, alb cald (2700–3000 K), **SMD2835, 60 LED/m, lățime 8 mm, 50 cm**, autoadezivă, cu întrerupător pe cablu. Grosimea cu tot cu LED-uri: **maximum 2,6 mm** (cele cu 2835 au de obicei ~1,6–2 mm; benzile 5050 sunt prea groase). Cablul: rotund, **maximum Ø4 mm**. La 60 LED/m, 50 cm consumă aproximativ 2,4–3 W, adică LED-ul de 5 V / 3 W declarat pe site. Verifică puterea exactă a benzii pe care o cumperi.
 - Încărcător USB de 5 V, minimum 1 A.
 - Alice de oțel pentru greutate, plus adeziv (epoxy sau silicon). Cât încape în tavă: **Galet ~150 g, Monolit și Con ~250 g**.
-- 3 șuruburi autofiletante pentru plastic, M3 × 8 (merge și × 10, **nu mai lungi**), **cap bombat (pan head)** cu diametrul capului de maximum 6 mm, de exemplu DIN 7981 sau ISO 7045. Intră în găurile de 2,6 mm din cele 3 bosaje, iar capul stă îngropat în capac.
+- 3 șuruburi pentru plastic, cu cap bombat, alese ca un singur reper comercial și confirmate pe un cupon de print. DIN 7981 (autofiletant, dimensiune ST) și ISO 7045 (filet metric M) nu sunt repere interschimbabile. Geometria actuală modelează un cap Ø5,6 × 2,2 mm, lungime sub cap 8 mm, pilot Ø2,6 mm. Nu a fost verificat filetul sau cuplul de strângere; măsoară reperul ales și adaptează pilotul la recomandările lui.
 - 4 picioare de pâslă autoadezive, Ø10 mm.
-- Opțional: un colier mic pentru fixarea cablului.
+- De proiectat și verificat: o ancorare mecanică a cablului care să preia tragerea fără solicitarea lipiturilor sau contactelor benzii. Canalul și colierul liber nu demonstrează o astfel de ancorare.
 
 ## Designul soclului (v2)
 
@@ -66,5 +66,5 @@ Fotografia clientului se șterge după print, conform politicii de confidențial
 
 - Toleranța baionetei și cât de ușor se rotește: trebuie un print de test.
 - Cât de uniform luminează banda LED prin difuzor și abajur.
-- Încălzirea: la 3 W ar trebui să rămână rece, dar verifică după o oră de funcționare.
+- Încălzirea: puterea de 3 W nu garantează că PLA-ul sau banda LED rămân reci. Pe un prototip supravegheat, măsoară temperatura ambiantă, banda, suportul și punctele apropiate de PLA la pornire, după 15/30/60 minute și până la stabilizare, inclusiv în condițiile maxime de utilizare declarate. Compară măsurătorile cu limitele componentelor și filamentului alese. Un test de o oră sau un rezultat CAD nu certifică siguranța; nu lăsa primul prototip nesupravegheat.
 - Contrastul litofaniei reale, cu filamentul ales. Se ajustează din `t_min` / `t_max` în `spec.json`.

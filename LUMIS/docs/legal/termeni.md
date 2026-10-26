@@ -38,7 +38,7 @@ Lampa este un obiect decorativ, pentru interior. Nu o lăsa aproape de surse de 
 
 ## 8. Reclamații și litigii
 
-Reclamațiile se trimit la [E-MAIL]; răspundem în cel mult [14 ZILE]. Poți apela și la ANPC, la procedura SAL (https://anpc.ro/ce-este-sal/) sau la platforma europeană SOL.
+Reclamațiile se trimit la [E-MAIL]; răspundem în cel mult [14 ZILE]. Poți apela și la ANPC, la procedura SAL (https://anpc.ro/ce-este-sal/).
 
 ## 9. Legea aplicabilă
 

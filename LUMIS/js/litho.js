@@ -92,9 +92,16 @@ export function lithoMap(img, mode = suggestPlacement(img)) {
 
 export function readPhoto(file) {
   return new Promise((resolve, reject) => {
-    if (!file || !/^image\//.test(file.type)) { reject(new Error('type')); return; }
+    if (!file || !['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) { reject(new Error('type')); return; }
+    if (file.size > 12 * 1024 * 1024) { reject(new Error('size')); return; }
     const url = URL.createObjectURL(file), im = new Image();
-    im.onload = () => { URL.revokeObjectURL(url); resolve(im); };
+    im.onload = () => {
+      URL.revokeObjectURL(url);
+      if (!im.naturalWidth || !im.naturalHeight || im.naturalWidth * im.naturalHeight > 40_000_000) {
+        reject(new Error('dimensions')); return;
+      }
+      resolve(im);
+    };
     im.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode')); };
     im.src = url;
   });

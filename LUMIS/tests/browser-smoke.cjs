@@ -22,7 +22,7 @@ const check = (name, ok, detail = '') => { checks.push({ name, ok }); console.lo
 (async () => {
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
   const url = `http://127.0.0.1:${server.address().port}/index.html`;
-  const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--enable-unsafe-swiftshader'] });
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -39,7 +39,7 @@ const check = (name, ok, detail = '') => { checks.push({ name, ok }); console.lo
   // the room: switch on at 0.55, stay on at 0.52, switch off below 0.5
   const at = async (p) => {
     await page.evaluate((p) => { const s = document.getElementById('poveste'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * p); }, p);
-    await page.waitForTimeout(150);
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     return page.evaluate(() => document.getElementById('poveste').classList.contains('on'));
   };
   const seq = [await at(0.3), await at(0.6), await at(0.52), await at(0.45)];
@@ -93,6 +93,7 @@ const check = (name, ok, detail = '') => { checks.push({ name, ok }); console.lo
   const h1 = await page.evaluate(() => location.hash);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(200);
+  await page.waitForFunction(() => location.hash === '');
   const h2 = await page.evaluate(() => location.hash);
   check('the link follows the configuration and clears on close', h1 === '#lampa/twist/galet/grafit/lumina' && h2 === '', `${h1} -> "${h2}"`);
   await page.goto(url + '#lampa/nu-exista', { waitUntil: 'networkidle' });

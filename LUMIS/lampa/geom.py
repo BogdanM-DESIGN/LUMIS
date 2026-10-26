@@ -219,7 +219,8 @@ def base_section(kind):
     hollow = unary_union([hollow, box(0, z0 - 1, flange_r(kind), z0 + wall + 0.1)])  # opening inside the flange
     shell = outer.difference(hollow)
     shell = shell.difference(box(0, z_sock, r_sock, H + 1))                                    # socket for the shade
-    shell = shell.difference(box(Ri['r_in'] - 0.15, H - Ri['seat_depth'], Ri['r_out'] + Ri['reveal'], H + 1))  # ring seat + shadow reveal
+    # ring seat + shadow reveal; the seat opens straight into the socket bore, so no thin lip is left between them
+    shell = shell.difference(box(r_sock - 0.05, H - Ri['seat_depth'], Ri['r_out'] + Ri['reveal'], H + 1))
     if shell.geom_type != 'Polygon':
         shell = max(shell.geoms, key=lambda g: g.area)
     return shell, inner

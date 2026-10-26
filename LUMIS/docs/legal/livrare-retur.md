@@ -8,7 +8,7 @@
 
 ## Dreptul de retragere
 
-Pentru lămpile din colecție (Wave, Twist, Ribbed), ai 14 zile de la primire ca să te retragi din contract, fără motiv. Ne anunți la [E-MAIL] sau prin formularul de retragere din anexa OUG 34/2014. Returnezi produsul în cel mult 14 zile de la anunț; costul returului îl suporți tu, [DACĂ NU SE STABILEȘTE ALTFEL]. Rambursăm suma în cel mult 14 zile de la primirea produsului înapoi.
+Pentru lămpile din colecție (Wave, Twist, Ribbed), ai 14 zile de la primire ca să te retragi din contract, fără motiv. Ne anunți la [E-MAIL] sau prin formularul de retragere din anexa OUG 34/2014. Returnezi produsul în cel mult 14 zile de la anunț; costul returului îl suporți tu, [DACĂ NU SE STABILEȘTE ALTFEL]. Rambursăm sumele datorate în cel mult 14 zile de la informarea privind retragerea. În condițiile legii, putem amâna rambursarea până la primirea bunului sau a dovezii expedierii lui, luând în considerare prima dintre aceste date. **(de verificat de avocat, inclusiv excepțiile și costul livrării standard)**
 
 **Litofania, fiind realizată după fotografia ta, este un produs personalizat.** Pentru produsele realizate după specificațiile clientului sau personalizate clar, legea permite excepția de la dreptul de retragere. **(de verificat formularea exactă și cum se informează clientul înainte de comandă: probabil o bifă separată în pasul de plată)**
 

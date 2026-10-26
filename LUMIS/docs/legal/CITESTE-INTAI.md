@@ -4,7 +4,7 @@ Fișierele din acest folder sunt **ciorne de lucru, nu sfaturi juridice**. Au fo
 
 Tot ce e între `[PARANTEZE]` trebuie completat cu datele reale. Prevederile marcate **(de verificat)** depind de forma juridică a firmei, de procesatorul de plăți și de curier.
 
-Repere pe care avocatul le va verifica, probabil: OUG 34/2014 (contracte la distanță), Legea 365/2002 (comerț electronic), Regulamentul (UE) 2016/679 (GDPR), OG 21/1992 (protecția consumatorilor), Legea 449/2003 și regulile noi privind garanția conformității (OUG 140/2021), plus obligațiile privind SAL/SOL ale ANPC.
+Repere pe care avocatul le va verifica, probabil: OUG 34/2014 (contracte la distanță), Legea 365/2002 (comerț electronic), Regulamentul (UE) 2016/679 (GDPR), OG 21/1992 (protecția consumatorilor), OUG 140/2021 pentru conformitatea bunurilor, plus obligațiile actuale privind SAL ale ANPC. Verifică formele consolidate și aplicabilitatea pentru produs. Vechea platformă europeană SOL/ODR nu mai este un canal activ.
 
 | Fișier | Conține |
 |---|---|

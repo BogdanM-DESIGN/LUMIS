@@ -172,7 +172,7 @@ function openDialog(dlg, opener) {
 $$('dialog').forEach((dlg) => {
   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   $$('[data-close]', dlg).forEach((b) => b.addEventListener('click', () => dlg.close()));
-  dlg.addEventListener('close', () => { const o = openers.get(dlg); if (o && o.isConnected) o.focus(); });
+  dlg.addEventListener('close', () => { if (dlg.open) return; const o = openers.get(dlg); if (o && o.isConnected) o.focus(); });
 });
 $('[data-info]').addEventListener('click', (e) => openDialog($('#infoDlg'), e.currentTarget));
 
@@ -180,6 +180,7 @@ $('[data-info]').addEventListener('click', (e) => openDialog($('#infoDlg'), e.cu
 const dlg = $('#productDlg'), form = $('#config'), viewer = $('.viewer', dlg);
 const sel = { product: null, base: null, color: null, ring: null, qty: 1, lit: true };
 let studio = null, studioMod = null, photoCanvas = null, photoImg = null, placement = 'wrap';
+let productSession = 0, photoRequest = 0;
 
 const radios = (name, list, swatch) => list.map((o) => `
   <label><input type="radio" name="${name}" value="${o.id}" id="${name}-${o.id}"${swatch ? ` aria-label="${esc(o.name)}"` : ''}>
@@ -254,8 +255,11 @@ $('#photoInput').addEventListener('change', async (e) => {
   const file = e.target.files?.[0];
   e.target.value = ''; // the file is not kept by the form either
   if (!file) return;
+  const request = ++photoRequest, session = productSession;
   try {
-    photoImg = await readPhoto(file);
+    const image = await readPhoto(file);
+    if (request !== photoRequest || session !== productSession || !dlg.open) return;
+    photoImg = image;
     placement = suggestPlacement(photoImg);
     applyPhoto();
     $('#photoLabel').textContent = 'Fotografia ta e pe lampă';
@@ -263,7 +267,8 @@ $('#photoInput').addEventListener('change', async (e) => {
     $('#placeField').hidden = false;
     if (sel.lit === false) $('#viewerNote').textContent = 'Stinsă, fotografia se vede doar ca relief. Aprinde lampa ca s-o vezi.';
   } catch {
-    $('#photoLabel').textContent = 'Fișierul nu poate fi citit. Alege o imagine JPG sau PNG.';
+    if (request !== photoRequest || session !== productSession || !dlg.open) return;
+    $('#photoLabel').textContent = 'Alege JPG, PNG sau WebP de maximum 12 MB și 40 megapixeli.';
   }
 });
 function applyPhoto() {
@@ -274,6 +279,7 @@ function applyPhoto() {
   requestAnimationFrame(() => placePlace(true));
 }
 function clearPhoto() {
+  photoRequest++;
   photoCanvas = null; photoImg = null;
   $('#placeField').hidden = true;
 }
@@ -283,19 +289,21 @@ $('#photoClear').addEventListener('click', () => {
   $('#photoClear').hidden = true;
 });
 
-async function ensureStudio() {
+async function ensureStudio(session) {
   // a canvas whose context was released cannot host a new one, so every opening gets a fresh canvas
   const old = $('#studio'), canvas = old.cloneNode(false);
   old.replaceWith(canvas);
   const fallback = $('#studioFallback'), loading = $('#studioLoading');
   try {
     studioMod = studioMod || await import('./studio.js');
+    if (session !== productSession || !dlg.open || !canvas.isConnected) return;
     if (!studioMod.webglAvailable()) throw new Error('no-webgl');
     studio = studioMod.createStudio(canvas, { reduceMotion: reduce() });
     canvas.hidden = false; fallback.hidden = true; loading.hidden = true;
     $('#litSeg').hidden = false; $('#resetView').hidden = false;
     $('#viewerNote').textContent = 'Formele pieselor printate. Trage de lampă sau folosește săgețile ca s-o rotești.';
   } catch (err) {
+    if (session !== productSession || !dlg.open) return;
     console.warn('Previzualizarea 3D nu a pornit:', err?.message || err);
     studio = null; canvas.hidden = true; loading.hidden = true;
     const p = byId(PRODUCTS, sel.product);
@@ -306,6 +314,11 @@ async function ensureStudio() {
 }
 
 async function openProduct(id, opener, config = null) {
+  const session = ++productSession;
+  disposeStudio();
+  clearPhoto();
+  $('#photoLabel').textContent = 'Încarcă o fotografie';
+  $('#photoClear').hidden = true;
   const p = byId(PRODUCTS, id);
   Object.assign(sel, { product: id, ...p.defaults, ...(config || {}), qty: 1 });
   $('#pName').textContent = p.name;
@@ -314,12 +327,12 @@ async function openProduct(id, opener, config = null) {
   $('#photoNight').src = p.images.night.src; $('#photoNight').alt = `Randare de ambient: ${p.photoAlt}, seara`;
   $('#photoDay').src = p.images.day.src; $('#photoDay').alt = `Randare de ambient: ${p.photoAlt}, ziua`;
   $('#studioLoading').hidden = false;
-  if (dlg.open) dlg.close();
-  openDialog(dlg, opener);
+  if (!dlg.open) openDialog(dlg, opener);
+  else if (opener) openers.set(dlg, opener);
   setHash(linkHash(sel));
   showTab(false);
-  await ensureStudio();
-  if (!dlg.open) { disposeStudio(); return; }
+  await ensureStudio(session);
+  if (session !== productSession || !dlg.open) return;
   if (photoCanvas && p.personal) studio?.setPhoto(photoCanvas);
   setLit(true, false);
   syncConfig(false);
@@ -328,6 +341,8 @@ async function openProduct(id, opener, config = null) {
 }
 function disposeStudio() { studio?.dispose(); studio = null; }
 dlg.addEventListener('close', () => {
+  if (dlg.open) return; // ignore an older close event delivered after the sheet reopened
+  productSession++;
   setHash('');
   disposeStudio();
   clearPhoto(); // the photo lives only while the sheet is open

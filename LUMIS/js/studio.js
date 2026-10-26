@@ -252,7 +252,7 @@ export function createStudio(canvas, { reduceMotion = false } = {}) {
   ro.observe(canvas);
 
   const loader = new THREE.TextureLoader();
-  loader.load('img/litofanie-mostra.webp', (t) => { t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); sampleTex = t; applyMaterials(); request(); });
+  loader.load('img/litofanie-mostra.webp', (t) => { if (!alive) { t.dispose(); return; } t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); sampleTex = t; applyMaterials(); request(); });
 
   return {
     set({ shade: kind, base: b, color, ring: r }) {

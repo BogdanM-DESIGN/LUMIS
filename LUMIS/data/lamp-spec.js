@@ -200,7 +200,7 @@ export const LAMP = {
   },
   "ring": {
     "r_in": 54.6,
-    "r_out": 57.8,
+    "r_out": 57.3,
     "height": 3.1,
     "seat_depth": 0.6,
     "reveal": 0.45

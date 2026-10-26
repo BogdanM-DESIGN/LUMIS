@@ -81,7 +81,8 @@ def thickness_fn(v):
 
 
 def make(photo_path, mode=None, nth=1024, nz=512):
-    img = Image.open(photo_path)
+    with Image.open(photo_path) as source:
+        img = ImageOps.exif_transpose(source).convert('RGB')
     mode = ALIASES.get(mode, mode) or suggest(img)
     v = litho_map(img, mode)
     body = geom.shade_body('litho', nth=nth, nz=nz, thickness=thickness_fn(v))
