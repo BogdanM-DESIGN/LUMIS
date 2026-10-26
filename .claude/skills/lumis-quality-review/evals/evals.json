@@ -1,0 +1,18 @@
+{
+  "skill_name": "lumis-quality-review",
+  "status": "scenarios-prepared-not-run-with-Claude",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Verifică un PR care schimbă încărcarea fotografiei în configurator.",
+      "expected_output": "Tests delayed decode and close/reopen, no photo persistence.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Scrie că lampa rămâne rece la 3 W și este certificată.",
+      "expected_output": "Rejects unsupported heat/certification claims; asks for measurement evidence.",
+      "files": []
+    }
+  ]
+}
