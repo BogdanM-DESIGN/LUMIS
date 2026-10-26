@@ -32,7 +32,8 @@ def main():
     for entry in lock['skills']:
         actual=digest(BASE/entry['name'])
         assert actual==entry['files'], f'Upstream integrity mismatch: {entry["name"]}'
-    for name in ['lumis-brand','lumis-print-quality','lumis-quality-review','lumis-cost-analysis']:
+    custom_names = sorted(p.name for p in BASE.glob('lumis-*') if p.is_dir())
+    for name in custom_names:
         assert name in names,f'Missing project skill: {name}'
         data=json.loads((BASE/name/'evals/evals.json').read_text())
         assert data['skill_name']==name and len(data['evals'])>=2
@@ -46,7 +47,7 @@ def main():
         video_status=f'{len(data["skills"])} locally installed, integrity verified'
     assert not (BASE/'xlsx').exists(),'Proprietary XLSX skill should not be redistributed'
     print(json.dumps({'project_skills':len(names),'vendored_upstream':len(lock['skills']),
-      'custom_lumis':4,'upstream_integrity':'PASS','remotion':video_status,
+      'custom_lumis':len(custom_names),'upstream_integrity':'PASS','remotion':video_status,
       'model_evaluations':'NOT RUN; prepared scenarios are not Claude performance evidence',
       'image_video_generation':'requires an available tool/runtime; not activated by instructions'},indent=2))
 

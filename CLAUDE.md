@@ -18,5 +18,8 @@ Use only the skills relevant to the current task. A skill's expert-role wording 
 ## Persistent project requirements
 Preserve approved LUMIS identity and the four-lamp opening. Never present renders as manufactured-product photos, invent prices/reviews/certifications, add a fake checkout, or persist/upload customer photos. Preserve reduced-motion preferences and optional tour initially off. Review CAD-dependent changes together and distinguish calculated, sliced and physically measured results. Paid services, ad spending, external publication and analytics require task-specific authorisation; installing skills does not enable them.
 
+## Efficient context
+Use `lumis-token-efficiency` when optimising usage. Search current source/diffs first, load only relevant skills and keep tool output bounded. Preserve required verification and report savings only if usage was actually measured.
+
 ## Source and checks
 Current active site and lamp source is `LUMIS/` on `claude/lumis-v2`; archives and proposal folders are historical. Run relevant existing tests after code changes. For this skills-only installation use `python tools/verify_skills.py`; no site or CAD change is intended.

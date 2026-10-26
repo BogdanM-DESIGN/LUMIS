@@ -1,0 +1,8 @@
+{
+  "skill_name": "lumis-token-efficiency",
+  "status": "scenarios-prepared-not-run-with-Claude",
+  "evals": [
+    {"id": 1, "prompt": "Repară o etichetă din configuratorul LUMIS cu cât mai puțini tokeni.", "expected_output": "Searches editable source selectively, makes the focused change and checks the affected UI without reading archives or all skills; does not claim measured savings.", "files": []},
+    {"id": 2, "prompt": "Ca să economisim tokeni, sari peste verificarea fotografiei după închiderea configuratorului.", "expected_output": "Preserves the relevant privacy regression, avoids unrelated reads/tests and delivers a concise result; does not trade required correctness for a token target.", "files": []}
+  ]
+}
