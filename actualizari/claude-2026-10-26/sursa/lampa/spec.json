@@ -1,0 +1,252 @@
+{
+  "_": "Single source of truth for the LUMIS lamp. All lengths in millimetres. Used by lampa/generate.py (printable parts) and copied to data/lamp-spec.js for the website.",
+  "base": {
+    "height": 36,
+    "outer_radius": 64,
+    "wall": 2.4,
+    "top_thickness": 2.4,
+    "chaikin": 4,
+    "profiles": {
+      "galet": [
+        [
+          0,
+          4
+        ],
+        [
+          53,
+          4
+        ],
+        [
+          53,
+          4.6
+        ],
+        [
+          54.5,
+          6.1
+        ],
+        [
+          61,
+          12.6
+        ],
+        [
+          64.2,
+          17.4
+        ],
+        [
+          64.5,
+          22
+        ],
+        [
+          62.5,
+          29.5
+        ],
+        [
+          60.2,
+          34.4
+        ],
+        [
+          58.6,
+          36
+        ],
+        [
+          0,
+          36
+        ]
+      ],
+      "monolit": [
+        [
+          0,
+          4
+        ],
+        [
+          60.5,
+          4
+        ],
+        [
+          60.5,
+          4.6
+        ],
+        [
+          63.5,
+          7.6
+        ],
+        [
+          64,
+          8.4
+        ],
+        [
+          64,
+          33.6
+        ],
+        [
+          61.6,
+          36
+        ],
+        [
+          0,
+          36
+        ]
+      ],
+      "con": [
+        [
+          0,
+          4
+        ],
+        [
+          66,
+          4
+        ],
+        [
+          66,
+          4.6
+        ],
+        [
+          66.5,
+          5.1
+        ],
+        [
+          60.4,
+          34.4
+        ],
+        [
+          59,
+          36
+        ],
+        [
+          0,
+          36
+        ]
+      ]
+    },
+    "_profiles": "(r, z) of the visible body, z from the top of the plinth (4) to 36. Every outward step going up is at most 45 degrees, so the body prints upright without supports.",
+    "corner": 1.0,
+    "_corner": "largest rounding of any profile corner, mm"
+  },
+  "shade": {
+    "radius": 54,
+    "height": 172,
+    "z0": 36,
+    "wall": 0.9,
+    "collar": {
+      "height": 10,
+      "wall": 2.4,
+      "slot_width": 3.6,
+      "slot_depth": 5,
+      "slot_turn_deg": 20,
+      "slots": 3
+    },
+    "shapes": {
+      "wave": {
+        "lobes": 6,
+        "amplitude": 0.09,
+        "twist_deg": 140,
+        "env_in": [
+          0.03,
+          0.16
+        ],
+        "env_out": 0.14
+      },
+      "twist": {
+        "ribs": 14,
+        "amplitude": 0.034,
+        "twist_deg": 180,
+        "env_in": [
+          0.03,
+          0.1
+        ],
+        "env_out": 0.08
+      },
+      "ribbed": {
+        "ribs": 36,
+        "amplitude": 0.02,
+        "profile": [
+          [
+            0,
+            1
+          ],
+          [
+            0.22,
+            0.905
+          ],
+          [
+            0.74,
+            1.12
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "env_in": [
+          0.02,
+          0.05
+        ],
+        "env_out": 0.03
+      },
+      "litho": {
+        "t_min": 0.8,
+        "t_max": 3.0,
+        "band": 0.035
+      }
+    }
+  },
+  "socket": {
+    "clearance": 0.25,
+    "wall": 2.0,
+    "depth": 12,
+    "pin_diameter": 3.0,
+    "pin_length": 1.6
+  },
+  "ring": {
+    "r_in": 54.6,
+    "r_out": 57.8,
+    "height": 3.1,
+    "seat_depth": 0.6,
+    "reveal": 0.45
+  },
+  "bottom": {
+    "thickness": 4,
+    "clearance": 0.3,
+    "screws": 3,
+    "screw_hole": 2.6,
+    "felt_diameter": 10,
+    "felt_depth": 0.8,
+    "tray_inner_r": 25,
+    "tray_height": 14,
+    "tray_wall": 1.6
+  },
+  "led": {
+    "post_od": 36,
+    "post_wall": 2.0,
+    "post_top": 112,
+    "strip_width": 8,
+    "strip_length_mm": 500,
+    "diffuser_od": 46,
+    "diffuser_wall": 1.0,
+    "diffuser_top": 116,
+    "cable_d": 4.0
+  },
+  "cable_exit": {
+    "angle_deg": 90,
+    "width": 6,
+    "height": 4.5
+  },
+  "plinth": {
+    "height": 4,
+    "inset": 2.6,
+    "_": "the bottom plate doubles as a recessed plinth: the body seems to float on a shadow line"
+  },
+  "interior": {
+    "ceiling_deg": 45,
+    "boss_width": 8,
+    "boss_depth": 8,
+    "boss_height": 10,
+    "pilot_hole": 2.6,
+    "lip_height": 3,
+    "lip_wall": 1.6,
+    "flange": 8,
+    "screw_from_edge": 5.6,
+    "counterbore_r": 3.2,
+    "counterbore_depth": 2.4
+  }
+}

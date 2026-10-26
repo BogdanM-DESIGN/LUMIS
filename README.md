@@ -1,5 +1,20 @@
 # LUMIS — site, imagini și predare pentru Claude
 
+## Actualizarea Claude din 26 octombrie 2026
+
+**Cel mai nou pachet primit** este păstrat separat, fără modificarea conținutului furnizat de Claude:
+
+- **[Descarcă pachetul nou integral — aproximativ 28 MB](livrare/LUMIS-pentru-ChatGPT-2026-10-26.zip?raw=true)**
+- **[Sursele noi ale site-ului și generatorului de piese](actualizari/claude-2026-10-26/sursa/)**
+- **[Cele 11 piese STL](actualizari/claude-2026-10-26/modele-stl/)**
+- **[Exportul HTML autonom nou](actualizari/claude-2026-10-26/LUMIS-deschide.html?raw=true)**
+- **[Promptul de analiză trimis de Claude](actualizari/claude-2026-10-26/PROMPT-ChatGPT.md)**
+- **[Capturile noi](actualizari/claude-2026-10-26/capturi/)** și **[randările pieselor](actualizari/claude-2026-10-26/randari/)**
+
+Acest pachet include remedierea pe telefon descrisă de Claude pentru controalele Aprinsă/Stinsă. Analiza independentă a acestei versiuni este în curs; încărcarea nu constituie validarea fabricației, siguranței sau a afirmațiilor din rapoartele primite. Nu folosi exportul HTML anterior pentru a verifica această remediere.
+
+Secțiunile de mai jos documentează **predarea anterioară**, păstrată pentru istoric. Claude rămâne programatorul și designerul principal; ChatGPT face analiza independentă și propune corecții pentru verificarea lui Claude.
+
 Acesta este pachetul complet al versiunii realizate: cod, imagini noi, configurator 3D, documentație, capturi și promptul pentru analiză.
 
 ## Descarcă pentru Claude
