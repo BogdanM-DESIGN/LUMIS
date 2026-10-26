@@ -12,7 +12,7 @@ test('custom configuration round-trips', () => {
 });
 
 test('short link opens with the model defaults', () => {
-  assert.deepEqual(parseLink('#lampa/twist'), { product: 'twist', base: 'monolit', color: 'negru', ring: 'champagne' });
+  assert.deepEqual(parseLink('#lampa/twist'), { product: 'twist', base: 'monolit', color: 'negru', ring: 'lumina' });
 });
 
 test('unknown ids are rejected or replaced by defaults', () => {

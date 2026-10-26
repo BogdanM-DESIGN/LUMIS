@@ -6,7 +6,7 @@ Site de prezentare și configurator pentru lămpile LUMIS (Litofanie, Wave, Twis
 
 ```
 index.html            pagina
-css/fonts.css         Bodoni Moda + Instrument Sans, servite local (OFL 1.1)
+css/fonts.css         Bodoni Moda (marca și titlurile) + Manrope (textul), servite local (OFL 1.1)
 css/site.css          tot stilul, cu variabile la început
 data/catalog.js       singurul loc pentru produse, socluri, culori, inele, prețuri, imagini și textele din Atelier
 js/main.js            pagina: camera zi/seară, tur, colecție, foaia de produs, coș
@@ -41,6 +41,13 @@ python3 -m http.server 8080
 ```
 node --test tests/*.test.mjs        # coșul + potrivirea formelor site / piese printate, fără dependențe
 node tests/browser-smoke.cjs        # verificări în Chromium; necesită Playwright (npm i -D playwright)
+python tests/audit-regressions.py http://127.0.0.1:8080   # regresii: fotografie întârziată, linkuri, limite foto
+python tests/lamp-audit.py          # orientarea EXIF a litofaniei, controlul negativ pentru punți
+```
+
+Testele Python cer Playwright pentru Python și Pillow; `CHROMIUM_PATH` poate indica un Chromium local. `lampa/overhang.py` iese cu codul 2 dacă o punte e mai lungă de 12 mm: piesa trebuie privită în slicer, nu e neapărat greșită.
+
+```
 ```
 
 ## Ce se completează înainte de lansare

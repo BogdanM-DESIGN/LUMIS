@@ -24,6 +24,7 @@ cd LUMIS
 python3 -m http.server 8080          # site-ul, la http://localhost:8080
 node --test tests/*.test.mjs         # 19 teste: coș, linkuri, potrivirea formelor site / piese
 node tests/browser-smoke.cjs         # 11 verificări în Chromium (necesită Playwright)
+python tests/audit-regressions.py URL # 6 regresii în browser (Playwright pentru Python)
 python lampa/generate.py             # regenerează piesele (necesită trimesh, manifold3d, shapely)
 python lampa/overhang.py             # pante de print și pereți
 python lampa/fit.py                  # lampa asamblată în calculator, cu LED, cablu și șuruburi

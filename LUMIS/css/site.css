@@ -295,3 +295,50 @@ legend, .legend { font-size: 11px; letter-spacing: .12em; text-transform: upperc
 @media (max-height: 560px) and (max-width: 1000px) {
   .sheet-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: none; }
 }
+
+/* Editorial proposal: readable Manrope text, Bodoni retained for the LUMIS identity. */
+:root { --sans: 'Manrope', 'Helvetica Neue', Arial, sans-serif; --muted: #62635E; --space: clamp(96px, 12vw, 176px); }
+body { font-size: 14px; line-height: 1.75; letter-spacing: 0; }
+.body { font-size: 14px; line-height: 1.85; max-width: 43ch; }
+.cap, .nav-links a, .btn, .cart, .tour { font-weight: 500; letter-spacing: .1em; }
+.title { font-family: var(--mark); font-size: clamp(29px, 3.2vw, 46px); line-height: 1.18; text-transform: none; letter-spacing: -.035em; text-wrap: balance; }
+.hero-mark { letter-spacing: .07em; }
+.hero-shade { background: linear-gradient(180deg, rgba(0,0,0,.14), transparent 45%, transparent 66%, rgba(0,0,0,.48)); }
+.hero-foot h1 { font-family: var(--mark); font-size: clamp(27px, 3vw, 44px); font-weight: 400; line-height: 1.18; letter-spacing: -.025em; text-transform: none; max-width: 18ch; }
+.hero-foot p { font-size: 11px; line-height: 1.8; margin-top: 12px; letter-spacing: .06em; }
+.hero-foot .btn { min-height: 50px; padding-inline: 30px; }
+.intro { gap: 20px; }
+.story-card .title { font-size: 28px; line-height: 1.2; }
+.sec-head { align-items: end; gap: 24px 60px; margin-bottom: 44px; }
+.sec-head .title { max-width: 19ch; }
+.sec-head .body { max-width: 35ch; }
+.grid { column-gap: 24px; }
+.item-media { border-radius: 3px; }
+.item-row { align-items: baseline; text-transform: none; letter-spacing: 0; gap: 12px; margin-top: 18px; }
+.item-row > span:first-child { font-family: var(--mark); font-size: 25px; line-height: 1.2; }
+.item-row > span:last-child { font-size: 10px; color: var(--muted); }
+.item-desc { font-size: 12px; line-height: 1.7; color: var(--muted); }
+.round { width: 44px; height: 44px; }
+.personal-copy > .title { max-width: 16ch; margin-bottom: 36px; }
+.steps h3, .atelier-list h3 { font-size: 14px; font-weight: 500; letter-spacing: -.01em; text-transform: none; }
+.steps p, .atelier-list p { font-size: 13px; line-height: 1.85; }
+.config #pName { font-size: 42px; }
+.config .body { font-size: 13px; line-height: 1.8; }
+.config legend, .specs summary { font-size: 11px; letter-spacing: .06em; }
+.config .opts label span { letter-spacing: .05em; }
+.price-row { align-items: center; gap: 12px; }
+.foot-row { font-size: 10px; line-height: 1.9; letter-spacing: .04em; }
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+  .hero-foot h1 { font-size: 30px; max-width: 15ch; }
+  .hero-foot p { font-size: 10px; max-width: 32ch; }
+  .hero-foot .btn { min-height: 46px; }
+  .title { font-size: 33px; }
+  .story-card .title { font-size: 26px; }
+  .sec-head { margin-bottom: 32px; }
+  .sec-head .body { font-size: 13px; max-width: 34ch; }
+  .item-row > span:first-child { font-size: 28px; }
+  .item-row > span:last-child { font-size: 11px; }
+  .item-desc { font-size: 13px; }
+  .personal-copy > .title { margin-bottom: 26px; }
+}
