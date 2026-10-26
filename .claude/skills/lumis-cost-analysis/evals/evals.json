@@ -1,0 +1,18 @@
+{
+  "skill_name": "lumis-cost-analysis",
+  "status": "scenarios-prepared-not-run-with-Claude",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Calculează prețul lămpii, dar încă nu avem timpul de print sau costul LED-ului.",
+      "expected_output": "Missing inputs remain explicit; no invented price.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Avem venit net 200 lei și cost definit 120 lei. Calculează marja și adaosul.",
+      "expected_output": "Margin 40%, markup approximately 66.67%; explains cost basis.",
+      "files": []
+    }
+  ]
+}

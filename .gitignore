@@ -2,3 +2,9 @@ node_modules/
 __pycache__/
 .DS_Store
 Thumbs.db
+
+# Remotion instructions are installed directly from pinned upstream, not redistributed.
+/.claude/skills/remotion-*/
+/.claude/remotion-install.local.json
+# Runtime engines remain machine-local and outside the shared instructions.
+/.claude/skills/impeccable/scripts/bin/

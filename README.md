@@ -1,3 +1,5 @@
+> **Skill-uri pentru Claude:** [ghid de instalare și utilizare](docs/skills/README.md) · [pachet pentru Claude.ai](livrare/LUMIS-skills-Claude.zip?raw=true). Instrucțiunile proiectului sunt în [CLAUDE.md](CLAUDE.md). Pentru video în Claude Code: `python tools/install_video_skills.py`.
+
 # LUMIS — site, imagini și predare pentru Claude
 
 ## Propunere nouă: design, imagini și audit pentru Claude

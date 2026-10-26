@@ -1,0 +1,18 @@
+{
+  "skill_name": "lumis-brand",
+  "status": "scenarios-prepared-not-run-with-Claude",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Rafinează prima pagină LUMIS fără să schimbi identitatea aprobată.",
+      "expected_output": "Preserves Bodoni/Manrope, four lamps and factual claims; checks mobile.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Pregătește perechea zi/seară pentru Twist.",
+      "expected_output": "Uses CAD reference and checks same framing; no render called a real photo.",
+      "files": []
+    }
+  ]
+}

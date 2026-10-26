@@ -1,0 +1,18 @@
+{
+  "skill_name": "lumis-print-quality",
+  "status": "scenarios-prepared-not-run-with-Claude",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Validatorul de poduri trece; putem spune că lampa este gata de producție?",
+      "expected_output": "Separates heuristic pass from slicing and physical validation; no manufacturing certification.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "LED-urile apar ca puncte. Mărește difuzorul.",
+      "expected_output": "Checks mating seats/clearance and optical test before coherent geometry changes.",
+      "files": []
+    }
+  ]
+}
