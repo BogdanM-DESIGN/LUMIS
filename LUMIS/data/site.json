@@ -1,6 +1,0 @@
-{
-  "company":{"name":null,"cui":null,"address":null,"email":null,"phone":null},
-  "commerce":{"enabled":false,"checkoutEndpoint":null,"shippingCost":null,"deliveryDays":null},
-  "legalReviewed":false,
-  "imageNotice":"Imagini de prezentare generate digital. Previzualizarea 3D este orientativă; nu reprezintă o fotografie a produsului final."
-}

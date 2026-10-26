@@ -1,1 +1,1 @@
-{"name":"lumis","private":true,"type":"module","scripts":{"test":"node --test tests/cart.test.js","start":"python3 -m http.server 8080","build:preview":"node scripts/build-preview.mjs"},"devDependencies":{"esbuild":"0.25.12"}}
+{"type":"module","private":true,"scripts":{"test":"node --test tests/*.test.mjs"}}

@@ -1,41 +1,38 @@
-# LUMIS — site, imagini și predare pentru Claude
+# LUMIS
 
-Acesta este pachetul complet al versiunii realizate: cod, imagini noi, configurator 3D, documentație, capturi și promptul pentru analiză.
+Lămpi decorative printate 3D: site de prezentare cu configurator și fișierele pentru lampa reală, din aceeași sursă.
 
-## Descarcă pentru Claude
+**Stadiu: prelansare.** Nu există prețuri, firmă, plată sau fotografii ale produselor fabricate. Toate imaginile sunt randări digitale, iar site-ul spune asta. Nicio piesă nu a fost încă printată.
 
-Descarcă **ambele arhive** și atașează-le în aceeași conversație Claude:
+## Ce e aici
 
-1. **[Cod, site și documentație — aproximativ 25 MB](livrare/LUMIS-Claude-1-code-et-documentation.zip?raw=true)**
-2. **[Imagini noi PNG master — aproximativ 18 MB](livrare/LUMIS-Claude-2-imagini-master.zip?raw=true)**
+| Cale | Ce conține |
+|---|---|
+| [`LUMIS/`](LUMIS/) | **sursa principală**: site-ul, generatorul de piese, fișierele de print, testele și documentația. Începe cu [`LUMIS/README.md`](LUMIS/README.md). |
+| [`LUMIS/lampa/`](LUMIS/lampa/) | lampa reală: `spec.json` (dimensiunile), generatorul, fișierele 3MF gata de print și [ghidul de print și asamblare](LUMIS/lampa/GHID-PRINT.md) |
+| [`LUMIS/VERIFICARE.md`](LUMIS/VERIFICARE.md) | ce a fost verificat și ce nu |
+| [`LUMIS/docs/`](LUMIS/docs/) | lista de fotografii reale de făcut, ciornele juridice (de verificat de un avocat) și randările soclurilor |
+| `LUMIS-deschide.html` | tot site-ul într-un singur fișier, pentru prezentare: se deschide cu dublu-clic într-un browser |
+| [`PREDARE-CHATGPT.md`](PREDARE-CHATGPT.md) | context și reguli pentru analiza făcută de ChatGPT |
+| [`PROMPT-PENTRU-CLAUDE.md`](PROMPT-PENTRU-CLAUDE.md) | brieful de rafinare a site-ului |
+| `imagini-noi-master/`, `original/` | imaginile master și pachetul inițial, păstrate pentru referință |
 
-Dacă GitHub afișează pagina fișierului, apasă **Download raw file** / pictograma de descărcare. Cele două arhive sunt separate pentru a evita un singur atașament de aproximativ 43 MB.
+## Rulare și teste
 
-Apoi copiază textul din **[PROMPT-PENTRU-CLAUDE.md](PROMPT-PENTRU-CLAUDE.md)** în conversația Claude.
+```
+cd LUMIS
+python3 -m http.server 8080          # site-ul, la http://localhost:8080
+node --test tests/*.test.mjs         # 19 teste: coș, linkuri, potrivirea formelor site / piese
+node tests/browser-smoke.cjs         # 11 verificări în Chromium (necesită Playwright)
+python lampa/generate.py             # regenerează piesele (necesită trimesh, manifold3d, shapely)
+python lampa/overhang.py             # pante de print și pereți
+python lampa/fit.py                  # lampa asamblată în calculator, cu LED, cablu și șuruburi
+```
 
-Alternativ, **Code → Download ZIP** descarcă întregul repository, inclusiv sursele și arhivele de livrare.
+## Cum lucrăm
 
-## Vezi site-ul pe calculator
+- **Claude:** programare, design, piesele lămpii.
+- **ChatGPT:** cerințe, analiză și verificarea rezultatelor.
+- **Proprietarul:** decizii, print de test și aprobarea finală.
 
-Descarcă și extrage prima arhivă, apoi deschide **LUMIS-deschide.html** într-un browser actualizat. Acesta este un export autonom cu cod, imagini și fonturi încorporate. Unele previzualizatoare de atașamente nu execută JavaScript: deschide fișierul descărcat în browser.
-
-Pentru dezvoltare și publicare, folosește sursele modulare din **[LUMIS/](LUMIS/)** și instrucțiunile din **[README-ul proiectului](LUMIS/README.md)**. Pagina HTML din interfața GitHub este o vizualizare de cod; nu este o versiune publicată a site-ului.
-
-## Ce include
-
-- Prezentarea LUMIS peste cele patru lămpi, cu imagine separată pentru telefon.
-- Camera cu tranziție zi → seară → aprinderea lămpii.
-- Configurator 3D rotativ, trei socluri, patru culori și două inele.
-- Simularea locală a fotografiei pentru litofanie, galerie și coș persistent.
-- Derulare fluidă și tur automat opțional, cu oprire la interacțiune.
-- Imagini WebP responsive, fonturi locale și documentație de publicare.
-- **11 PNG-uri master noi:** zece folosite în site și o panoramă alternativă.
-- Arhiva originală nemodificată, capturi și rapoarte de testare.
-
-Imaginile sunt randări generate digital, nu fotografii ale unor produse fabricate. Modelele web sunt aproximări parametrice, nu fișiere CAD de fabricație.
-
-## Verificări și stadiu
-
-Vezi **[VERIFICARE.md](LUMIS/VERIFICARE.md)** și **[rapoartele](LUMIS-verificare/)** pentru verificările efectuate: opt teste unitare și fluxuri browser pentru configurator, coș, fotografie, tur, cameră, dimensiuni mobile și fallback fără WebGL.
-
-Comenzile și plățile nu sunt active. Prețurile, datele firmei, condițiile comerciale și textele juridice trebuie completate înainte de vânzare. Încărcarea acestui repository nu publică automat un site prin GitHub Pages.
+Fiecare etapă vine ca **pull request draft**, pe care proprietarul îl verifică înainte de unirea în `main`. Observațiile se scriu ca comentarii la PR sau ca issue.
