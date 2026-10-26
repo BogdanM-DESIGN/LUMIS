@@ -27,6 +27,7 @@ DESCRIPTIONS={
 'lumis-brand':'Preserve LUMIS visual identity, Romanian copy, approved typography and CAD fidelity in website design, imagery, ads and video.',
 'lumis-print-quality':'Review LUMIS CAD, STL/3MF, tolerances, wall thickness, slicing, LED diffusion and prototype tests; distinguish computed from physically verified results.',
 'lumis-quality-review':'Review LUMIS mobile layout, configurator, photo privacy, motion and truthful commercial claims using relevant regression tests.',
+'lumis-token-efficiency':'Reduce unnecessary reads, verbose tool output and repeated work while preserving required verification and complete deliverables; do not claim unmeasured token savings.',
 'lumis-cost-analysis':'Build LUMIS manufacturing cost models, budgets, spreadsheets and charts from sourced inputs, leaving unknowns explicit.'}
 
 def main():
@@ -52,6 +53,8 @@ def main():
             with zipfile.ZipFile(io.BytesIO(stream.getvalue())) as check:
                 assert check.testzip() is None
             outer.writestr(name+'.zip',stream.getvalue())
+            if name == 'lumis-token-efficiency':
+                (output.parent/'LUMIS-token-efficiency-Claude.zip').write_bytes(stream.getvalue())
     with zipfile.ZipFile(output) as check:
         assert check.testzip() is None
     print(f'Created {output.name}: {len(names)} individual skills, {output.stat().st_size} bytes.')
