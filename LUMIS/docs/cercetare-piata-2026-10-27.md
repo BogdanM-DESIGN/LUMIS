@@ -45,6 +45,27 @@ Metodă: căutări web (instrument cu acoperire în principal americană) pentru
 
 Calendar de cumpărare, de pus la test: Dragobete (24 februarie), Mărțișor (1 martie), 8 martie, Paște, 1 iunie și Crăciun. Dragobete și Mărțișor apar în căutări; restul e cunoaștere generală, nu verificată aici.
 
+## Profitabilitate: ce se poate spune acum (27 octombrie 2026, completat 31 octombrie)
+
+**Nu se poate calcula o ordine de profit fără trei lucruri: ore și grame măsurate pe printuri reale, prețul filamentului din facturi și un preț ales de proprietar.** Calculatorul `LUMIS/docs/calculator-profit.xlsx` are celulele goale pentru ele și calculează profitul pe bucată, profitul pe oră de imprimantă și marja. Formulele au fost verificate cu valori de test; fișierul livrat nu conține nicio valoare inventată.
+
+**Criteriul care contează:** profitul pe oră de imprimantă, nu marja. Un print scurt cu marjă mică poate aduce mai mult într-o săptămână decât unul de 10 ore cu marjă mare ([sursă: calculatoare și ghiduri de preț pentru vânzători de printuri](https://blog.printpal.io/how-to-price-3d-printed-models-you-sell-online/); anecdotic, nu date de industrie). Munca proprie ([10-15 minute pe bucată, după un ghid](https://dev.to/polyformprints/how-much-should-i-charge-for-3d-prints-a-complete-pricing-breakdown-for-etsy-sellers-2kpl)) și comisioanele platformei reduc profitul real.
+
+**Observații cu sursă:**
+- Serviciile românești de printare cer aproximativ 10 lei/oră plus 0,50-0,60 lei/gram (rezumat de căutare, Brig.ro). Dedus: a vinde doar timp de imprimantă aduce puțin pe oră. Un produs finit are potențial mai mare, dar cere clienți, nu doar printare.
+- Prețurile de produse similare pe Etsy sunt în USD: ghivece 10-50 USD (estimare terță), cuburi litofanie cu LED 15-60 USD, abajur litofanie 65 USD (un magazin). Nu sunt prețuri românești și nu includ transport și taxe.
+- Imprimanta amortizată pe oră e o parte mică din cost în exemplele găsite (aprox. 0,14 USD/oră pentru o imprimantă de 700 USD, un exemplu); mai mare e munca și rebuturile.
+
+**Clasament de ipoteze după potențialul de profit pe oră (nu e măsurat):**
+1. **Obiecte personalizate scurte** (plăcuțe, brelocuri, litere): print de minute, preț mai mare pentru personalizare (o sursă comercială indică 30-50% peste varianta generică; neverificat). Risc: concurență mare, preț mic.
+2. **Litofanie plată sau cub cu LED:** reutilizează tehnica LUMIS, valoare percepută mare ca cadou. Print de ore, nu de minute. Cere previzualizare per client.
+3. **Ghivece și vaze în formele LUMIS:** cerere documentată pe Etsy, dar concurență mare și prețuri medii; print de câteva ore.
+4. **Lămpi LUMIS:** preț potențial cel mai mare pe bucată, dar print lung, componente, risc la transport și nicio măsurătoare încă. Merită doar dacă profitul pe oră iese bun după primul print.
+5. **Piese pentru firme, la comandă:** cerere stabilă, dar prețul de piață (aprox. 10 lei/oră + material) arată profit mic pe oră, afară de piese complexe sau serii.
+6. **Organizatoare și suporturi:** vândute des, dar produse comune; profit mic pe bucată.
+
+**Ce schimbă clasamentul:** primul print, prețul real al filamentului și 3-4 prețuri de la concurenți români (eMAG, OLX, Etsy, Instagram). Cu ele, calculatorul dă ordinea reală.
+
 ## Cum se verifică ieftin
 
 Pentru fiecare idee: 5–10 bucăți, un anunț pe un marketplace sau pe rețelele proprii, un preț fixat de proprietar. Se notează vizualizările, mesajele și vânzările. După 3–4 săptămâni se compară.
